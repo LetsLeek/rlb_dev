@@ -1,0 +1,7 @@
+@baseurl = http://127.0.0.1:8080/api
+
+### GET all mails
+GET {{baseurl}}/mails
+
+### GET Mail by id
+GET {{baseurl}}/mails/2

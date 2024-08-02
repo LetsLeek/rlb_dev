@@ -1,0 +1,68 @@
+@baseurl = http://127.0.0.1:8080/api
+
+### ==== GET REQUESTS ==== ###
+ 
+### GET all keyWords
+GET {{baseurl}}/keywords
+
+### GET all IT keyWords
+GET {{baseurl}}/keywords?dep=IT
+
+### GET all PROD keyWords
+GET {{baseurl}}/keywords?dep=Produktion
+
+### GET all NET keyWords
+GET {{baseurl}}/keywords?dep=NET
+
+### ==== POST REQUESTS ==== ###
+
+### POST keyword // TODO objekt überarbeiten + sicherheit hinzufügen (keine person aus einer anderen abteilung)
+POST {{baseurl}}/keywords
+Content-Type: application/json
+
+{
+    "name": "test",
+    "responsiblePersons": [
+      {
+        "name": "Joshua Lopez",
+        "email": "jordanlisa@outlook.com"
+      },
+      {
+        "name": "David Hopkins",
+        "email": "galvanstephanie@outlook.com"
+      }
+    ],
+    "control": "quarterly_firstday",
+    "checkedBy": null
+}
+
+### PUT keyword
+PUT {{baseurl}}/keywords/12
+Content-Type: application/json
+
+{
+    "id": 12,
+    "name": "HCL Notes",
+    "responsiblePersons": [
+      { "name": "David Brown", "email": "davidbrown@email.com" },
+      { "name": "Sarah Wilson", "email": "sarahwilson@email.com" },
+      { "name": "Matthew Garcia", "email": "matthewgarcia@email.com" }
+    ],
+    "control": "weekly_firstworkday"
+   
+  }
+
+# {
+#     "name": "sssss",
+#     "responsiblePersons": [
+#       {
+#         "name": "Joshua Lopez",
+#         "email": "jordanlisa@outlook.com"
+#       },
+#       {
+#         "name": "David Hopkins",
+#         "email": "galvanstephanie@outlook.com"
+#       }
+#     ],
+#     "control": "daily",
+# }

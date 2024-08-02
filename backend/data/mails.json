@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "subject": "Empirium Logs Check",
+    "keywordId": 3,
+
+    "receivedDateTime": "2024-07-31T09:00:00Z",
+    "from": {
+      "emailAddress": "manager@example.com",
+      "name": "Project Manager"
+    },
+    "body": {
+      "content": "This is a reminder for the meeting scheduled for tomorrow.",
+      "contentType": "text"
+    }
+  },
+  {
+    "id": 2,
+    "subject": "Project Update",
+    "receivedDateTime": "2024-07-30T15:30:00Z",
+    "from": {
+      "emailAddress": "team@example.com",
+      "name": "Team Coordinator"
+    },
+    "body": {
+      "content": "Please find the latest project update attached.",
+      "contentType": "text"
+    }
+  },
+  {
+    "id": 3,
+    "subject": "Invoice Received",
+    "receivedDateTime": "2024-07-29T12:45:00Z",
+    "from": {
+      "emailAddress": "billing@example.com",
+      "name": "Billing Department"
+    },
+    "body": {
+      "content": "Your invoice has been received. Please review the attached document.",
+      "contentType": "text"
+    }
+  }
+]

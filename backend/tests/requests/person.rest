@@ -1,0 +1,4 @@
+@baseurl = http://127.0.0.1:8080/api
+
+### GET all persons
+GET {{baseurl}}/persons

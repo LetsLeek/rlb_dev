@@ -1,0 +1,25 @@
+@baseurl = http://127.0.0.1:8080/api
+
+### GET all PROD checks
+GET {{baseurl}}/checksPROD
+
+### GET all NET checks
+GET {{baseurl}}/checksNET
+
+### GET all IT checks
+GET {{baseurl}}/checksIT
+
+### GET check by id
+GET {{baseurl}}/checks/1?dep=it
+
+### POST check
+POST {{baseurl}}/checks
+Content-Type: application/json
+
+{
+
+    "date": "",
+    "state": "",
+    "isChecked": false,
+    "keyWords": []
+}
