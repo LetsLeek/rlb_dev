@@ -23,3 +23,27 @@ Content-Type: application/json
     "isChecked": false,
     "keyWords": []
 }
+### PUT
+
+PUT {{baseurl}}/checks?dep=IT&id=1
+Content-Type: application/json
+
+{
+  "date": "05.08.2024 14:30:00",
+  "state": "updated state",
+  "isChecked": true,
+  "keyWords": [
+    {
+      "name": "updated keyword",
+      "checkedBy": {
+        "person": { "name": "John Doe" },
+        "date": "2024-08-05T14:30:00Z",
+        "department": "IT"
+      }
+    }
+  ],
+  "remark": "updated remark",
+  "department": "IT",
+  "id": 1
+}
+

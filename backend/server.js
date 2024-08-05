@@ -111,13 +111,16 @@ app.get("/api/checks/it", checkHandler.getAllChecksIT);
 app.get("/api/checks/prod", checkHandler.getAllChecksPROD);
 app.get("/api/checks/net", checkHandler.getAllChecksNET);
 app.get("/api/checks/:id", checkHandler.getById);
+app.put("/api/checks/", checkHandler.checkUpdate)
 app.post("/api/checks/it", checkHandler.createCheckIT);
 app.post("/api/checks/prod", checkHandler.createCheckPROD);
 app.post("/api/checks/net", checkHandler.createCheckNET);
+app.get('/api/checks/date/:date', checkHandler.getCheckByDate);
 
 /******************  MAILS  ******************/
 app.get("/api/mails", mailHandler.getAll);
 app.get("/api/mails/:id", mailHandler.getById);
+app.put('/api/mails/:id', mailHandler.updateMail)
 
 // register catch-all route to handle client-side routing with index.html
 app.get("*", (_req, res) => {
