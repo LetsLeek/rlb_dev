@@ -4,7 +4,12 @@ const fs = require('fs').promises;
 const getAll = async (req, res) => {
     try {
         const data = await fs.readFile('data\\persons.json');
-        const jsonData = JSON.parse(data);
+        let jsonData = JSON.parse(data);
+
+        const department = req.query.dep ? req.query.dep : undefined;
+        if (department) {
+            jsonData = jsonData.filter((person) => person.department == department)
+        }
         res.json(jsonData);
     } catch(err) {
         logger.error('Error reading or parsing the file:', err);

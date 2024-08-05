@@ -12,7 +12,8 @@
     "body": {
       "content": "This is a reminder for the meeting scheduled for tomorrow.",
       "contentType": "text"
-    }
+    },
+    "department": "IT"
   },
   {
     "id": 2,
@@ -25,7 +26,8 @@
     "body": {
       "content": "Please find the latest project update attached.",
       "contentType": "text"
-    }
+    },
+    "department": "NET"
   },
   {
     "id": 3,
@@ -38,6 +40,7 @@
     "body": {
       "content": "Your invoice has been received. Please review the attached document.",
       "contentType": "text"
-    }
+    },
+    "department": "Produktion"
   }
 ]

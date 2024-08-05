@@ -1,1 +1,539 @@
-[{"id":2,"name":"Database Backup","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":3,"name":"Server Maintenance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":4,"name":"Application Updates","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":5,"name":"Network Security Audit","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":6,"name":"User Account Management","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":7,"name":"Disk Space Monitoring","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":8,"name":"System Performance Check","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":9,"name":"Software License Compliance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":10,"name":"IT Asset Inventory","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":2,"name":"Bandwidth Monitoring","control":"daily","checkedBy":{"person":null,"date":null},"department":"NET","responsiblePersons":[{"name":"Matthew Garcia","email":"matthewgarcia@outlook.com","department":"NET"},{"name":"Anna Rodriguez","email":"annarodriguez@outlook.com","department":"NET"}]},{"id":3,"name":"Firewall Rules Review","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"NET","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"NET"},{"name":"Janice Scott","email":"henrysara@outlook.com","department":"NET"}]},{"id":4,"name":"VPN Configuration","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"NET","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"NET"},{"name":"Kristin White","email":"jacob52@outlook.com","department":"NET"}]},{"id":5,"name":"Network Security Assessment","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"NET","responsiblePersons":[{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"NET"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"NET"}]},{"id":6,"name":"Switch Configuration Check","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"NET","responsiblePersons":[{"name":"Janice Scott","email":"henrysara@outlook.com","department":"NET"},{"name":"Anna Rodriguez","email":"annarodriguez@outlook.com","department":"NET"}]},{"id":7,"name":"Router Firmware Update","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"NET","responsiblePersons":[{"name":"Matthew Garcia","email":"matthewgarcia@outlook.com","department":"NET"},{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"NET"}]},{"id":8,"name":"Network Backup Verification","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"NET","responsiblePersons":[{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"NET"},{"name":"David Brown","email":"davidbrown@outlook.com","department":"NET"}]},{"id":9,"name":"IP Address Management","control":"daily","checkedBy":{"person":null,"date":null},"department":"NET","responsiblePersons":[{"name":"Matthew Garcia","email":"matthewgarcia@outlook.com","department":"NET"},{"name":"Kristin White","email":"jacob52@outlook.com","department":"NET"}]},{"id":10,"name":"Network Troubleshooting","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"NET","responsiblePersons":[{"name":"Janice Scott","email":"henrysara@outlook.com","department":"NET"},{"name":"Anna Rodriguez","email":"annarodriguez@outlook.com","department":"NET"}]},{"id":2,"name":"Work Safety Training","control":"yearly_firstday","checkedBy":{"person":null,"date":null},"department":"Produktion","responsiblePersons":[{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"Produktion"},{"name":"Omar Grant","email":"jonesmatthew@outlook.com","department":"Produktion"}]},{"id":3,"name":"Equipment Calibration","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"Produktion","responsiblePersons":[{"name":"Rachel Nelson","email":"tanyazuniga@outlook.com","department":"Produktion"},{"name":"Shelby Benson","email":"carlos58@outlook.com","department":"Produktion"}]},{"id":4,"name":"Production Line Inspection","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"Produktion","responsiblePersons":[{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"Produktion"},{"name":"Omar Grant","email":"jonesmatthew@outlook.com","department":"Produktion"}]},{"id":5,"name":"Safety Equipment Check","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"Produktion","responsiblePersons":[{"name":"Rachel Nelson","email":"tanyazuniga@outlook.com","department":"Produktion"},{"name":"Shelby Benson","email":"carlos58@outlook.com","department":"Produktion"}]},{"id":6,"name":"Raw Materials Inventory","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"Produktion","responsiblePersons":[{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"Produktion"},{"name":"Omar Grant","email":"jonesmatthew@outlook.com","department":"Produktion"}]},{"id":7,"name":"Maintenance Logs Review","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"Produktion","responsiblePersons":[{"name":"Rachel Nelson","email":"tanyazuniga@outlook.com","department":"Produktion"},{"name":"Shelby Benson","email":"carlos58@outlook.com","department":"Produktion"}]},{"id":8,"name":"Compliance Inspection","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"Produktion","responsiblePersons":[{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"Produktion"},{"name":"Omar Grant","email":"jonesmatthew@outlook.com","department":"Produktion"}]},{"id":9,"name":"Quality Assurance","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"Produktion","responsiblePersons":[{"name":"Rachel Nelson","email":"tanyazuniga@outlook.com","department":"Produktion"},{"name":"Shelby Benson","email":"carlos58@outlook.com","department":"Produktion"}]},{"id":10,"name":"Safety Drills","control":"yearly_firstday","checkedBy":{"person":null,"date":null},"department":"Produktion","responsiblePersons":[{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"Produktion"},{"name":"Omar Grant","email":"jonesmatthew@outlook.com","department":"Produktion"}]},{"id":1,"name":"System Logs Review","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"}]}]
+[
+  {
+    "id": 2,
+    "name": "Database Backup",
+    "control": "weekly_firstworkday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "IT",
+    "responsiblePersons": [
+      {
+        "name": "Michael Johnson",
+        "email": "michaeljohnson@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Emily Davis",
+        "email": "emilydavis@outlook.com",
+        "department": "IT"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Server Maintenance",
+    "control": "monthly_lastday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "IT",
+    "responsiblePersons": [
+      {
+        "name": "David Brown",
+        "email": "davidbrown@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Sarah Wilson",
+        "email": "sarahwilson@outlook.com",
+        "department": "IT"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Application Updates",
+    "control": "quarterly_firstday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "IT",
+    "responsiblePersons": [
+      {
+        "name": "Ryan Martinez",
+        "email": "ryanmartinez@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Laura Thompson",
+        "email": "laurathompson@outlook.com",
+        "department": "IT"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Network Security Audit",
+    "control": "quarterly_firstday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "IT",
+    "responsiblePersons": [
+      {
+        "name": "John Doe",
+        "email": "johndoe@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Emily Davis",
+        "email": "emilydavis@outlook.com",
+        "department": "IT"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "User Account Management",
+    "control": "monthly_lastday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "IT",
+    "responsiblePersons": [
+      {
+        "name": "Jane Smith",
+        "email": "janesmith@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Michael Johnson",
+        "email": "michaeljohnson@outlook.com",
+        "department": "IT"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Disk Space Monitoring",
+    "control": "weekly_firstworkday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "IT",
+    "responsiblePersons": [
+      {
+        "name": "David Brown",
+        "email": "davidbrown@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Sarah Wilson",
+        "email": "sarahwilson@outlook.com",
+        "department": "IT"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "System Performance Check",
+    "control": "daily",
+    "checkedBy": { "person": null, "date": null },
+    "department": "IT",
+    "responsiblePersons": [
+      {
+        "name": "Ryan Martinez",
+        "email": "ryanmartinez@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Laura Thompson",
+        "email": "laurathompson@outlook.com",
+        "department": "IT"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Software License Compliance",
+    "control": "monthly_lastday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "IT",
+    "responsiblePersons": [
+      {
+        "name": "John Doe",
+        "email": "johndoe@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Emily Davis",
+        "email": "emilydavis@outlook.com",
+        "department": "IT"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "IT Asset Inventory",
+    "control": "quarterly_firstday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "IT",
+    "responsiblePersons": [
+      {
+        "name": "Jane Smith",
+        "email": "janesmith@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Michael Johnson",
+        "email": "michaeljohnson@outlook.com",
+        "department": "IT"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Bandwidth Monitoring",
+    "control": "daily",
+    "checkedBy": { "person": null, "date": null },
+    "department": "NET",
+    "responsiblePersons": [
+      {
+        "name": "Matthew Garcia",
+        "email": "matthewgarcia@outlook.com",
+        "department": "NET"
+      },
+      {
+        "name": "Anna Rodriguez",
+        "email": "annarodriguez@outlook.com",
+        "department": "NET"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Firewall Rules Review",
+    "control": "monthly_lastday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "NET",
+    "responsiblePersons": [
+      {
+        "name": "David Brown",
+        "email": "davidbrown@outlook.com",
+        "department": "NET"
+      },
+      {
+        "name": "Janice Scott",
+        "email": "henrysara@outlook.com",
+        "department": "NET"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "VPN Configuration",
+    "control": "weekly_firstworkday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "NET",
+    "responsiblePersons": [
+      {
+        "name": "Ryan Martinez",
+        "email": "ryanmartinez@outlook.com",
+        "department": "NET"
+      },
+      {
+        "name": "Kristin White",
+        "email": "jacob52@outlook.com",
+        "department": "NET"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Network Security Assessment",
+    "control": "quarterly_firstday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "NET",
+    "responsiblePersons": [
+      {
+        "name": "Laura Thompson",
+        "email": "laurathompson@outlook.com",
+        "department": "NET"
+      },
+      {
+        "name": "Emily Davis",
+        "email": "emilydavis@outlook.com",
+        "department": "NET"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Switch Configuration Check",
+    "control": "monthly_lastday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "NET",
+    "responsiblePersons": [
+      {
+        "name": "Janice Scott",
+        "email": "henrysara@outlook.com",
+        "department": "NET"
+      },
+      {
+        "name": "Anna Rodriguez",
+        "email": "annarodriguez@outlook.com",
+        "department": "NET"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Router Firmware Update",
+    "control": "weekly_firstworkday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "NET",
+    "responsiblePersons": [
+      {
+        "name": "Matthew Garcia",
+        "email": "matthewgarcia@outlook.com",
+        "department": "NET"
+      },
+      {
+        "name": "Ryan Martinez",
+        "email": "ryanmartinez@outlook.com",
+        "department": "NET"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Network Backup Verification",
+    "control": "monthly_lastday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "NET",
+    "responsiblePersons": [
+      {
+        "name": "Laura Thompson",
+        "email": "laurathompson@outlook.com",
+        "department": "NET"
+      },
+      {
+        "name": "David Brown",
+        "email": "davidbrown@outlook.com",
+        "department": "NET"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "IP Address Management",
+    "control": "daily",
+    "checkedBy": { "person": null, "date": null },
+    "department": "NET",
+    "responsiblePersons": [
+      {
+        "name": "Matthew Garcia",
+        "email": "matthewgarcia@outlook.com",
+        "department": "NET"
+      },
+      {
+        "name": "Kristin White",
+        "email": "jacob52@outlook.com",
+        "department": "NET"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Network Troubleshooting",
+    "control": "weekly_firstworkday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "NET",
+    "responsiblePersons": [
+      {
+        "name": "Janice Scott",
+        "email": "henrysara@outlook.com",
+        "department": "NET"
+      },
+      {
+        "name": "Anna Rodriguez",
+        "email": "annarodriguez@outlook.com",
+        "department": "NET"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Work Safety Training",
+    "control": "yearly_firstday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "Produktion",
+    "responsiblePersons": [
+      {
+        "name": "Sarah Wilson",
+        "email": "sarahwilson@outlook.com",
+        "department": "Produktion"
+      },
+      {
+        "name": "Omar Grant",
+        "email": "jonesmatthew@outlook.com",
+        "department": "Produktion"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Equipment Calibration",
+    "control": "monthly_lastday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "Produktion",
+    "responsiblePersons": [
+      {
+        "name": "Rachel Nelson",
+        "email": "tanyazuniga@outlook.com",
+        "department": "Produktion"
+      },
+      {
+        "name": "Shelby Benson",
+        "email": "carlos58@outlook.com",
+        "department": "Produktion"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Production Line Inspection",
+    "control": "weekly_firstworkday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "Produktion",
+    "responsiblePersons": [
+      {
+        "name": "Sarah Wilson",
+        "email": "sarahwilson@outlook.com",
+        "department": "Produktion"
+      },
+      {
+        "name": "Omar Grant",
+        "email": "jonesmatthew@outlook.com",
+        "department": "Produktion"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Safety Equipment Check",
+    "control": "quarterly_firstday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "Produktion",
+    "responsiblePersons": [
+      {
+        "name": "Rachel Nelson",
+        "email": "tanyazuniga@outlook.com",
+        "department": "Produktion"
+      },
+      {
+        "name": "Shelby Benson",
+        "email": "carlos58@outlook.com",
+        "department": "Produktion"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Raw Materials Inventory",
+    "control": "monthly_lastday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "Produktion",
+    "responsiblePersons": [
+      {
+        "name": "Sarah Wilson",
+        "email": "sarahwilson@outlook.com",
+        "department": "Produktion"
+      },
+      {
+        "name": "Omar Grant",
+        "email": "jonesmatthew@outlook.com",
+        "department": "Produktion"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Maintenance Logs Review",
+    "control": "weekly_firstworkday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "Produktion",
+    "responsiblePersons": [
+      {
+        "name": "Rachel Nelson",
+        "email": "tanyazuniga@outlook.com",
+        "department": "Produktion"
+      },
+      {
+        "name": "Shelby Benson",
+        "email": "carlos58@outlook.com",
+        "department": "Produktion"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Compliance Inspection",
+    "control": "monthly_lastday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "Produktion",
+    "responsiblePersons": [
+      {
+        "name": "Sarah Wilson",
+        "email": "sarahwilson@outlook.com",
+        "department": "Produktion"
+      },
+      {
+        "name": "Omar Grant",
+        "email": "jonesmatthew@outlook.com",
+        "department": "Produktion"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Quality Assurance",
+    "control": "quarterly_firstday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "Produktion",
+    "responsiblePersons": [
+      {
+        "name": "Rachel Nelson",
+        "email": "tanyazuniga@outlook.com",
+        "department": "Produktion"
+      },
+      {
+        "name": "Shelby Benson",
+        "email": "carlos58@outlook.com",
+        "department": "Produktion"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Safety Drills",
+    "control": "yearly_firstday",
+    "checkedBy": { "person": null, "date": null },
+    "department": "Produktion",
+    "responsiblePersons": [
+      {
+        "name": "Sarah Wilson",
+        "email": "sarahwilson@outlook.com",
+        "department": "Produktion"
+      },
+      {
+        "name": "Omar Grant",
+        "email": "jonesmatthew@outlook.com",
+        "department": "Produktion"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "System Logs Review",
+    "control": "daily",
+    "checkedBy": { "person": null, "date": null },
+    "department": "IT",
+    "responsiblePersons": [
+      {
+        "name": "John Doe",
+        "email": "johndoe@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Jane Smith",
+        "email": "janesmith@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "David Brown",
+        "email": "davidbrown@outlook.com",
+        "department": "IT"
+      }
+    ]
+  }
+]
