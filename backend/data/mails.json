@@ -1,46 +1,437 @@
 [
   {
     "id": 1,
-    "subject": "Empirium Logs Check",
-    "keywordId": 3,
-
-    "receivedDateTime": "2024-07-31T09:00:00Z",
+    "subject": "Database Backup",
+    "receivedDateTime": "2024-08-06T08:00:00Z",
     "from": {
-      "emailAddress": "manager@example.com",
-      "name": "Project Manager"
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
     },
     "body": {
-      "content": "This is a reminder for the meeting scheduled for tomorrow.",
+      "content": "This is a reminder for today's database backup. Ensure all backups are completed and verified.",
       "contentType": "text"
     },
-    "department": "IT"
+    "department": "IT",
+    "isChecked": true
   },
   {
     "id": 2,
-    "subject": "Project Update",
-    "receivedDateTime": "2024-07-30T15:30:00Z",
+    "subject": "Server Maintenance",
+    "receivedDateTime": "2024-08-06T09:00:00Z",
     "from": {
-      "emailAddress": "team@example.com",
-      "name": "Team Coordinator"
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
     },
     "body": {
-      "content": "Please find the latest project update attached.",
+      "content": "Reminder: Server maintenance is scheduled for today. Please check the maintenance logs and verify all tasks are completed.",
       "contentType": "text"
     },
-    "department": "NET"
+    "department": "IT",
+    "isChecked": false
   },
   {
     "id": 3,
-    "subject": "Invoice Received",
-    "receivedDateTime": "2024-07-29T12:45:00Z",
+    "subject": "Application Updates",
+    "receivedDateTime": "2024-08-06T10:00:00Z",
     "from": {
-      "emailAddress": "billing@example.com",
-      "name": "Billing Department"
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
     },
     "body": {
-      "content": "Your invoice has been received. Please review the attached document.",
+      "content": "Reminder for today's application updates. Make sure all applications are updated to the latest version.",
       "contentType": "text"
     },
-    "department": "Produktion"
+    "department": "IT",
+    "isChecked": false
+  },
+  {
+    "id": 4,
+    "subject": "Network Security Audit",
+    "receivedDateTime": "2024-08-06T11:00:00Z",
+    "from": {
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
+    },
+    "body": {
+      "content": "Reminder: Network security audit is scheduled for today. Ensure all security measures are up-to-date.",
+      "contentType": "text"
+    },
+    "department": "IT",
+    "isChecked": false
+  },
+  {
+    "id": 5,
+    "subject": "User Account Management",
+    "receivedDateTime": "2024-08-06T12:00:00Z",
+    "from": {
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
+    },
+    "body": {
+      "content": "Reminder for today's user account management tasks. Ensure all user accounts are properly managed and updated.",
+      "contentType": "text"
+    },
+    "department": "IT",
+    "isChecked": false
+  },
+  {
+    "id": 6,
+    "subject": "Disk Space Monitoring",
+    "receivedDateTime": "2024-08-06T13:00:00Z",
+    "from": {
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
+    },
+    "body": {
+      "content": "Reminder: Disk space monitoring is scheduled for today. Check disk usage and ensure adequate space is available.",
+      "contentType": "text"
+    },
+    "department": "IT",
+    "isChecked": false
+  },
+  {
+    "id": 7,
+    "subject": "System Performance Check",
+    "receivedDateTime": "2024-08-06T14:00:00Z",
+    "from": {
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
+    },
+    "body": {
+      "content": "Reminder for today's system performance check. Ensure system performance meets required standards.",
+      "contentType": "text"
+    },
+    "department": "IT",
+    "isChecked": false
+  },
+  {
+    "id": 8,
+    "subject": "Software License Compliance",
+    "receivedDateTime": "2024-08-06T15:00:00Z",
+    "from": {
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
+    },
+    "body": {
+      "content": "Reminder: Software license compliance check is scheduled for today. Verify that all software licenses are in compliance.",
+      "contentType": "text"
+    },
+    "department": "IT",
+    "isChecked": false
+  },
+  {
+    "id": 9,
+    "subject": "IT Asset Inventory",
+    "receivedDateTime": "2024-08-06T16:00:00Z",
+    "from": {
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
+    },
+    "body": {
+      "content": "Reminder for today's IT asset inventory. Ensure all IT assets are accounted for and properly documented.",
+      "contentType": "text"
+    },
+    "department": "IT",
+    "isChecked": false
+  },
+  {
+    "id": 10,
+    "subject": "Bandwidth Monitoring",
+    "receivedDateTime": "2024-08-06T08:00:00Z",
+    "from": {
+      "emailAddress": "net-team@example.com",
+      "name": "Network Team"
+    },
+    "body": {
+      "content": "Reminder: Bandwidth monitoring is scheduled for today. Check bandwidth usage and ensure optimal performance.",
+      "contentType": "text"
+    },
+    "department": "NET",
+    "isChecked": false
+  },
+  {
+    "id": 11,
+    "subject": "Firewall Rules Review",
+    "receivedDateTime": "2024-08-06T09:00:00Z",
+    "from": {
+      "emailAddress": "net-team@example.com",
+      "name": "Network Team"
+    },
+    "body": {
+      "content": "Reminder: Review firewall rules today. Ensure all firewall rules are updated and properly configured.",
+      "contentType": "text"
+    },
+    "department": "NET",
+    "isChecked": false
+  },
+  {
+    "id": 12,
+    "subject": "VPN Configuration Check",
+    "receivedDateTime": "2024-08-06T10:00:00Z",
+    "from": {
+      "emailAddress": "net-team@example.com",
+      "name": "Network Team"
+    },
+    "body": {
+      "content": "Reminder for today's VPN configuration check. Ensure all VPN configurations are correct and functioning.",
+      "contentType": "text"
+    },
+    "department": "NET",
+    "isChecked": false
+  },
+  {
+    "id": 13,
+    "subject": "Network Security Assessment",
+    "receivedDateTime": "2024-08-06T11:00:00Z",
+    "from": {
+      "emailAddress": "net-team@example.com",
+      "name": "Network Team"
+    },
+    "body": {
+      "content": "Reminder: Network security assessment is scheduled for today. Verify network security measures and vulnerabilities.",
+      "contentType": "text"
+    },
+    "department": "NET",
+    "isChecked": false
+  },
+  {
+    "id": 14,
+    "subject": "Switch Configuration Check",
+    "receivedDateTime": "2024-08-06T12:00:00Z",
+    "from": {
+      "emailAddress": "net-team@example.com",
+      "name": "Network Team"
+    },
+    "body": {
+      "content": "Reminder: Check switch configurations today. Ensure all switch settings are correctly applied.",
+      "contentType": "text"
+    },
+    "department": "NET",
+    "isChecked": false
+  },
+  {
+    "id": 15,
+    "subject": "Router Firmware Update",
+    "receivedDateTime": "2024-08-06T13:00:00Z",
+    "from": {
+      "emailAddress": "net-team@example.com",
+      "name": "Network Team"
+    },
+    "body": {
+      "content": "Reminder: Update router firmware today. Ensure that the latest firmware is applied to all routers.",
+      "contentType": "text"
+    },
+    "department": "NET",
+    "isChecked": false
+  },
+  {
+    "id": 16,
+    "subject": "Network Backup Verification",
+    "receivedDateTime": "2024-08-06T14:00:00Z",
+    "from": {
+      "emailAddress": "net-team@example.com",
+      "name": "Network Team"
+    },
+    "body": {
+      "content": "Reminder for today's network backup verification. Ensure all backups are completed and valid.",
+      "contentType": "text"
+    },
+    "department": "NET",
+    "isChecked": false
+  },
+  {
+    "id": 17,
+    "subject": "IP Address Management",
+    "receivedDateTime": "2024-08-06T15:00:00Z",
+    "from": {
+      "emailAddress": "net-team@example.com",
+      "name": "Network Team"
+    },
+    "body": {
+      "content": "Reminder: IP address management tasks are scheduled for today. Verify and update IP address assignments.",
+      "contentType": "text"
+    },
+    "department": "NET",
+    "isChecked": false
+  },
+  {
+    "id": 18,
+    "subject": "Network Troubleshooting",
+    "receivedDateTime": "2024-08-06T16:00:00Z",
+    "from": {
+      "emailAddress": "net-team@example.com",
+      "name": "Network Team"
+    },
+    "body": {
+      "content": "Reminder: Network troubleshooting tasks for today. Address any network issues and ensure proper functionality.",
+      "contentType": "text"
+    },
+    "department": "NET",
+    "isChecked": false
+  },
+  {
+    "id": 19,
+    "subject": "Work Safety Training",
+    "receivedDateTime": "2024-08-06T08:00:00Z",
+    "from": {
+      "emailAddress": "production-team@example.com",
+      "name": "Production Team"
+    },
+    "body": {
+      "content": "Reminder: Work safety training is scheduled for today. Ensure all personnel complete the training session.",
+      "contentType": "text"
+    },
+    "department": "Produktion",
+    "isChecked": false
+  },
+  {
+    "id": 20,
+    "subject": "Equipment Calibration",
+    "receivedDateTime": "2024-08-06T09:00:00Z",
+    "from": {
+      "emailAddress": "production-team@example.com",
+      "name": "Production Team"
+    },
+    "body": {
+      "content": "Reminder for today's equipment calibration. Ensure all equipment is calibrated according to specifications.",
+      "contentType": "text"
+    },
+    "department": "Produktion",
+    "isChecked": false
+  },
+  {
+    "id": 21,
+    "subject": "Production Line Inspection",
+    "receivedDateTime": "2024-08-06T10:00:00Z",
+    "from": {
+      "emailAddress": "production-team@example.com",
+      "name": "Production Team"
+    },
+    "body": {
+      "content": "Reminder: Production line inspection is scheduled for today. Ensure all production lines meet quality standards.",
+      "contentType": "text"
+    },
+    "department": "Produktion",
+    "isChecked": false
+  },
+  {
+    "id": 22,
+    "subject": "Safety Equipment Check",
+    "receivedDateTime": "2024-08-06T11:00:00Z",
+    "from": {
+      "emailAddress": "production-team@example.com",
+      "name": "Production Team"
+    },
+    "body": {
+      "content": "Reminder: Check all safety equipment today. Ensure all safety equipment is functional and up-to-date.",
+      "contentType": "text"
+    },
+    "department": "Produktion",
+    "isChecked": false
+  },
+  {
+    "id": 23,
+    "subject": "Raw Materials Inventory",
+    "receivedDateTime": "2024-08-06T12:00:00Z",
+    "from": {
+      "emailAddress": "production-team@example.com",
+      "name": "Production Team"
+    },
+    "body": {
+      "content": "Reminder for today's raw materials inventory. Ensure all raw materials are counted and recorded.",
+      "contentType": "text"
+    },
+    "department": "Produktion",
+    "isChecked": false
+  },
+  {
+    "id": 24,
+    "subject": "Maintenance Logs Review",
+    "receivedDateTime": "2024-08-06T13:00:00Z",
+    "from": {
+      "emailAddress": "production-team@example.com",
+      "name": "Production Team"
+    },
+    "body": {
+      "content": "Reminder: Review maintenance logs today. Ensure all maintenance activities are properly logged and reviewed.",
+      "contentType": "text"
+    },
+    "department": "Produktion",
+    "isChecked": false
+  },
+  {
+    "id": 25,
+    "subject": "Compliance Inspection",
+    "receivedDateTime": "2024-08-06T14:00:00Z",
+    "from": {
+      "emailAddress": "production-team@example.com",
+      "name": "Production Team"
+    },
+    "body": {
+      "content": "Reminder: Compliance inspection is scheduled for today. Verify all compliance requirements are met.",
+      "contentType": "text"
+    },
+    "department": "Produktion",
+    "isChecked": false
+  },
+  {
+    "id": 26,
+    "subject": "Quality Assurance",
+    "receivedDateTime": "2024-08-06T15:00:00Z",
+    "from": {
+      "emailAddress": "production-team@example.com",
+      "name": "Production Team"
+    },
+    "body": {
+      "content": "Reminder for today's quality assurance tasks. Ensure all quality checks are completed and documented.",
+      "contentType": "text"
+    },
+    "department": "Produktion",
+    "isChecked": false
+  },
+  {
+    "id": 27,
+    "subject": "Safety Drills",
+    "receivedDateTime": "2024-08-06T16:00:00Z",
+    "from": {
+      "emailAddress": "production-team@example.com",
+      "name": "Production Team"
+    },
+    "body": {
+      "content": "Reminder: Safety drills are scheduled for today. Ensure all employees participate in the drills.",
+      "contentType": "text"
+    },
+    "department": "Produktion",
+    "isChecked": false
+  },
+  {
+    "id": 28,
+    "subject": "System Logs Review",
+    "receivedDateTime": "2024-08-06T08:00:00Z",
+    "from": {
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
+    },
+    "body": {
+      "content": "Reminder: Review system logs today. Ensure all system logs are checked and any issues are addressed.",
+      "contentType": "text"
+    },
+    "department": "IT",
+    "isChecked": false
+  },
+  {
+    "id": 29,
+    "subject": "Daria",
+    "receivedDateTime": "2024-08-06T09:00:00Z",
+    "from": {
+      "emailAddress": "it-team@example.com",
+      "name": "IT Team"
+    },
+    "body": {
+      "content": "Reminder: Daria tasks are scheduled for today. Ensure all tasks assigned to Daria are completed.",
+      "contentType": "text"
+    },
+    "department": "IT",
+    "isChecked": false
   }
 ]

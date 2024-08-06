@@ -535,5 +535,29 @@
         "department": "IT"
       }
     ]
+  },
+  {
+    "id": 29,
+    "name": "Daria",
+    "responsiblePersons": [
+      {
+        "name": "Emily Davis",
+        "email": "emilydavis@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Ryan Martinez",
+        "email": "ryanmartinez@outlook.com",
+        "department": "IT"
+      },
+      {
+        "name": "Matthew Garcia",
+        "email": "matthewgarcia@outlook.com",
+        "department": "IT"
+      }
+    ],
+    "control": "daily",
+    "department": "IT",
+    "checkedBy": { "person": null, "date": null }
   }
 ]

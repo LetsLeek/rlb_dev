@@ -253,16 +253,14 @@ const getAllChecksPROD = async (req, res) => {
     try {
       const data = await fs.readFile("data/checks/checks_it.json");
       const jsonData = JSON.parse(data);
-      console.log("jsonData")
       res.json(jsonData);
-      console.log("jsonData")
     } catch (err) {
       logger.error("Error reading or parsing the file:", err);
       res.status(500).send("Internal Server Error");
     }
   };
 
-  const getById = async (req, res) => {
+const getById = async (req, res) => {
     try {
       let department = req.query.dep;
       let id = parseInt(req.params.id);
@@ -317,6 +315,96 @@ const readChecksFile = async (department) => {
       throw err;
     }
   };
+
+  const formatDateFromISO = (isoDate) => {
+    const date = new Date(isoDate);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+  
+    return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+  };
+  
+  
+  const getCheckByDate = async (req, res) => {
+    try {
+      let department = req.query.dep;
+      let isoDate = req.params.date;
+  
+      // Überprüfe, ob die Abteilung und das Datum gültig sind
+      if (!department) {
+        return res.status(400).json({ error: 'Department is required' });
+      }
+      
+      department = department.toUpperCase() === 'PRODUKTION' ? 'prod' : department.toLowerCase();
+  
+      if (!isoDate) {
+        return res.status(400).json({ error: 'Date is required' });
+      }
+  
+      // Konvertiere das ISO-Datum in das gewünschte Format
+      const formattedDate = formatDateFromISO(isoDate).split(' ')[0]; // Nur das Datum, keine Uhrzeit
+  
+      // Lese die Datei basierend auf der Abteilung
+      const data = await fs.readFile(`data/checks/checks_${department}.json`);
+      const jsonData = JSON.parse(data);
+      const check = jsonData.find((elem) => elem.date.startsWith(formattedDate));
+  
+      if (!check) {
+        return res.status(404).json({ error: 'Check not found' });
+      }
+  
+      res.json(check);
+    } catch (err) {
+      logger.error("Error finding/parsing/reading the (searched check)/file:", err);
+      res.status(500).send("Internal Server Error");
+    }
+  };
+
+  const checkUpdate = async (req, res) => {
+    try {
+      const { dep, id } = req.query;
+      const updatedData = req.body;
+  
+      // Überprüfe, ob die Abteilung und ID gültig sind
+      if (!dep || !id) {
+        return res.status(400).json({ error: 'Department and ID are required' });
+      }
+  
+      const department = dep.toUpperCase() === 'PRODUKTION' ? 'prod' : dep.toLowerCase();
+      const checkId = parseInt(id);
+  
+      if (isNaN(checkId)) {
+        return res.status(400).json({ error: 'Invalid ID' });
+      }
+  
+      // Lese die Datei basierend auf der Abteilung
+      const filePath = `data/checks/checks_${department}.json`;
+      const data = await fs.readFile(filePath, "utf8");
+      const jsonData = JSON.parse(data);
+  
+      // Finde den Check mit der angegebenen ID
+      const checkIndex = jsonData.findIndex((elem) => elem.id === checkId);
+  
+      if (checkIndex === -1) {
+        return res.status(404).json({ error: 'Check not found' });
+      }
+  
+      // Aktualisiere die Check-Daten
+      jsonData[checkIndex] = { ...jsonData[checkIndex], ...updatedData };
+  
+      // Schreibe die aktualisierten Daten zurück in die Datei
+      await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2));
+  
+      res.status(200).send("Check successfully updated");
+    } catch (err) {
+      logger.error("Error updating the check:", err);
+      res.status(500).send("Internal Server Error");
+    }
+  };
   
 
 module.exports = {
@@ -328,4 +416,6 @@ module.exports = {
   createCheckPROD,
   getById,
   postObjects,
+  getCheckByDate,
+  checkUpdate  
 };
