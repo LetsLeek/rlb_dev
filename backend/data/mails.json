@@ -282,7 +282,7 @@
       "contentType": "text"
     },
     "department": "Produktion",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 20,
@@ -297,7 +297,7 @@
       "contentType": "text"
     },
     "department": "Produktion",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 21,
@@ -312,7 +312,7 @@
       "contentType": "text"
     },
     "department": "Produktion",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 22,
@@ -327,7 +327,7 @@
       "contentType": "text"
     },
     "department": "Produktion",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 23,
@@ -342,7 +342,7 @@
       "contentType": "text"
     },
     "department": "Produktion",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 24,
@@ -357,7 +357,7 @@
       "contentType": "text"
     },
     "department": "Produktion",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 25,
@@ -372,7 +372,7 @@
       "contentType": "text"
     },
     "department": "Produktion",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 26,
@@ -387,7 +387,7 @@
       "contentType": "text"
     },
     "department": "Produktion",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 27,
@@ -402,7 +402,7 @@
       "contentType": "text"
     },
     "department": "Produktion",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 28,
