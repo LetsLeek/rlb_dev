@@ -27,7 +27,7 @@
       "contentType": "text"
     },
     "department": "IT",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 3,
@@ -42,7 +42,7 @@
       "contentType": "text"
     },
     "department": "IT",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 4,
@@ -57,7 +57,7 @@
       "contentType": "text"
     },
     "department": "IT",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 5,
@@ -162,7 +162,7 @@
       "contentType": "text"
     },
     "department": "NET",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 12,
@@ -177,7 +177,7 @@
       "contentType": "text"
     },
     "department": "NET",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 13,
@@ -207,7 +207,7 @@
       "contentType": "text"
     },
     "department": "NET",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 15,
