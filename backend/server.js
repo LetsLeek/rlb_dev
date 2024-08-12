@@ -32,6 +32,7 @@ const keywordHandler = require("./api/keyWord/keyword-handlers");
 const personHandler = require("./api/persons/person-handlers");
 const checkHandler = require("./api/checks/check-handlers");
 const mailHandler = require("./api/mails/mail-handlers");
+const sqlHandler = require('./api/sqlDataTest#/sql-handlers');
 
 /* ***************** CONFIG and CONSTS ********************* */
 const HOSTNAME = "0.0.0.0";
@@ -105,6 +106,9 @@ function restrictTo(...roles) {
 }
 
 //=========================== register all endpoints
+
+/******************  SQLTEST  ******************/
+app.get('/api/sqltest', sqlHandler.getAll);
 
 /******************  KEYWORDS  ******************/
 app.get("/api/keywords", keywordHandler.getAll);
