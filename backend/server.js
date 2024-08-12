@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 /* ***************** IMPORT LIBS *************************** */
 const { logger } = require("./logging/log");
 const DEFAULTS = require("./config/defaults.json");
+const database = require('./db/database');
 
 /* ***************** IMPORT AUTH *************************** */
 const {
@@ -36,8 +37,14 @@ const mailHandler = require("./api/mails/mail-handlers");
 const HOSTNAME = "0.0.0.0";
 const PORT = process.env.PORT || DEFAULTS.PORT;
 
-const MYSQL_CONNECTION_STRING = ""
-const MYSQL = process.env.MYSQL_RECREATE === "true";
+const MYSQL_CONFIG = {
+  host: 'localhost',
+  user: 'root',
+  password: 'hannah2020',
+  database: 'checkdb',
+  port: 3306
+};
+const MYSQL_RECREATE = process.env.MYSQL_RECREATE === "true";
 
 const secret = 'secret_key'; //TODO Secret key name bestimmen
 
@@ -134,6 +141,14 @@ app.get("*", (_req, res) => {
 // create HTTP server
 logger.info("Backend - Starting up ...");
 const httpServer = http.createServer(app);
+
+// establish DB connection (app crashs if connect to db fails)
+database.createConnection(MYSQL_CONFIG, MYSQL_RECREATE);
+
+// add function(s) so that they are accessible by tests
+httpServer.dropCurrentDatabase = async () => {
+  await database.dropCurrentDB(MYSQL_CONFIG);
+}
 
 // start listening to HTTP requests
 httpServer.listen(PORT, HOSTNAME, () => {
