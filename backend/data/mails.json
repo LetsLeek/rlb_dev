@@ -42,7 +42,7 @@
       "contentType": "text"
     },
     "department": "IT",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 4,
@@ -57,7 +57,7 @@
       "contentType": "text"
     },
     "department": "IT",
-    "isChecked": false
+    "isChecked": true
   },
   {
     "id": 5,
