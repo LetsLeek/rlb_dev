@@ -24,6 +24,8 @@
     "date-holidays": "^3.23.12",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.0",
     "winston": "^3.13.0"
   },
   "directories": {

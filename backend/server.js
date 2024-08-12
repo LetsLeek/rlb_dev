@@ -35,6 +35,10 @@ const mailHandler = require("./api/mails/mail-handlers");
 /* ***************** CONFIG and CONSTS ********************* */
 const HOSTNAME = "0.0.0.0";
 const PORT = process.env.PORT || DEFAULTS.PORT;
+
+const MYSQL_CONNECTION_STRING = ""
+const MYSQL = process.env.MYSQL_RECREATE === "true";
+
 const secret = 'secret_key'; //TODO Secret key name bestimmen
 
 /* ***************** START UP ******************************* */
