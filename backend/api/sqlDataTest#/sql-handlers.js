@@ -1,22 +1,15 @@
 const { logger } = require('../../logging/log');
-const mysql = require('mysql2/promise');
-
-
-
-const MYSQL_CONFIG = {
-    host: 'localhost',
-    user: 'root',
-    password: 'hannah2020',
-    database: 'checkdb',
-    port: 3306
-};
+const { getConnection } = require('../../db/database'); // Importiere die getConnection Methode
 
 // Funktion zum Abrufen aller Personen
 const getAll = async (req, res) => {
-    let connection;
     try {
-        // Erstelle eine Verbindung zur Datenbank
-        connection = await mysql.createConnection(MYSQL_CONFIG);
+        // Hole die bestehende Verbindung zur Datenbank
+        const connection = getConnection();
+
+        if (!connection) {
+            throw new Error('No database connection available.');
+        }
 
         // Führe eine Abfrage aus
         const [rows] = await connection.execute('SELECT * FROM Persons');
@@ -32,10 +25,6 @@ const getAll = async (req, res) => {
     } catch (err) {
         logger.error('Error retrieving data from the database:', err);
         res.status(500).send('Internal Server Error');
-    } finally {
-        if (connection) {
-            await connection.end(); // Schließe die Verbindung
-        }
     }
 };
 
