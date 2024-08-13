@@ -123,35 +123,60 @@ const updateById = async (req, res, next) => { //TODO UPDATE (through DB Connect
 }
 
 const create = async (req, res, next) => {
+    let connection;
+
     try {
         logger.debug('Keywords - adding new Keyword');
-        let newKeyword = req.body;
-        newKeyword.checkedBy = { "person": null, "date": null }
-        
+
+        const newKeyword = req.body;
+        newKeyword.checkedBy = { "person": null, "date": null };
+
+        // Validierungen
         if (newKeyword.name.length < 2) {
-            throw new BadRequest('The minimum length of name must no be under 2');
+            throw new BadRequest('The minimum length of name must not be under 2');
         }
 
-        if (newKeyword.responsiblePersons.length === 0) {
+        if (!Array.isArray(newKeyword.responsiblePersons) || newKeyword.responsiblePersons.length === 0) {
             throw new BadRequest('You need to choose at least one responsible Person');
         }
 
-        if (!newKeyword.control && typeof(newKeyword) != String) {
+        if (!newKeyword.control || typeof newKeyword.control !== 'string') {
             throw new BadRequest('You need to choose a control setting');
         }
 
-        let arr = await getAllKeywords();
+        // Verbindung zur Datenbank herstellen
+        connection = await getConnection();
 
-        newKeyword.id = arr.length+1;
+        if (!connection) {
+            throw new Error('No database connection available.');
+        }
 
-        arr.push(newKeyword);
-        await fs.writeFile("data\\keywords.json", JSON.stringify(arr)); 
+        // Einfügen des neuen Keywords in die Datenbank
+        const [result] = await connection.execute(
+            'INSERT INTO Keywords (name, control, department) VALUES (?, ?, ?)',
+            [newKeyword.name, newKeyword.control, newKeyword.department]
+        );
+
+        // Erhalte die ID des neu eingefügten Keywords
+        const keywordId = result.insertId;
+
+        // Verknüpfe die verantwortlichen Personen mit dem neuen Keyword
+        const responsiblePersons = newKeyword.responsiblePersons;
+        const values = responsiblePersons.map(person => [keywordId, person.id]);
+
+        if (values.length > 0) {
+            await connection.query(
+                'INSERT INTO Keyword_Person_Responsibilities (keyword_id, person_id) VALUES ?',
+                [values]
+            );
+        }
+
         res.status(201).send('Keyword successfully created');
-    } catch(err) {
+    } catch (err) {
         logger.error('Error creating the keyword:', err);
         res.status(500).send('Internal Server Error');
     }
-}
+};
 
 
 

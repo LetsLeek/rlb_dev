@@ -41,19 +41,19 @@ POST {{baseurl}}/sqltest/keywords
 Content-Type: application/json
 
 {
-    "name": "test",
-    "responsiblePersons": [
-      {
-        "name": "Joshua Lopez",
-        "email": "jordanlisa@outlook.com"
-      },
-      {
-        "name": "David Hopkins",
-        "email": "galvanstephanie@outlook.com"
-      }
-    ],
-    "control": "quarterly_firstday",
-    "checkedBy": null
+  "id": -1,
+  "name": "TESTTTTT",
+  "responsiblePersons": [
+    {
+      "id": 28,
+      "name": "Lois Gagea",
+      "email": "loisgagea@outlook.com",
+      "department": "Produktion"
+    }
+  ],
+  "control": "daily",
+  "department": "Produktion", 
+  "checkedBy": { "person": null, "date": null }
 }
 
 ### PUT keyword
