@@ -1,29 +1,31 @@
 const { logger } = require('../../logging/log');
-const fs = require('fs').promises;
+const { getConnection } = require('../../db/database');
 
 const getAll = async (req, res) => {
     try {
-        const data = await fs.readFile('data\\persons.json');
-        let jsonData = JSON.parse(data);
+
+        const connection = getConnection();
+
+        if (!connection) {
+            throw new Error('No database connection available.');
+        }
+
+        const [rows] = await connection.execute('SELECT * FROM Persons');
 
         const department = req.query.dep ? req.query.dep : undefined;
         if (department) {
-            jsonData = jsonData.filter((person) => person.department == department)
+            const filteredData = rows.filter((person) => person.department === department);
+            res.json(filteredData);
+        } else {
+            res.json(rows);
         }
-        res.json(jsonData);
     } catch(err) {
-        logger.error('Error reading or parsing the file:', err);
+        logger.error('Error retrieving data from the database:', err);
         res.status(500).send('Internal Server Error');
     }
 };
 
-const create = async (req, res) => {
-    // try {
-
-    // } catch(err) {
-        
-    // }
-}
+//TODO Create Persons from AD (through AD CONNECT)
 
 module.exports = {
     getAll

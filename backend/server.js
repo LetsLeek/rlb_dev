@@ -109,6 +109,7 @@ function restrictTo(...roles) {
 
 /******************  SQLTEST  ******************/
 app.get('/api/sqltest', sqlHandler.getAll);
+app.post('/api/sqltest/keywords', sqlHandler.createKeyword);
 
 /******************  KEYWORDS  ******************/
 app.get("/api/keywords", keywordHandler.getAll);

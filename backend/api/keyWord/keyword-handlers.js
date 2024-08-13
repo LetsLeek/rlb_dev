@@ -1,5 +1,6 @@
 const { logger } = require('../../logging/log');
 const fs = require('fs').promises;
+const { getConnection } = require('../../db/database');
 const path = require('path');
 
 const {
@@ -10,34 +11,86 @@ const {
     InternalServerError,
   } = require("../../middlewares/error-handling");
 
-const getAll = async (req, res, next) => {
-    try {
-        logger.debug('Keywords - getting new Keywords')
-        const data = await fs.readFile('data\\keywords.json');
-        let jsonData = JSON.parse(data);
+  const getAll = async (req, res, next) => {
+    let connection;
 
+    try {
+        logger.debug('Keywords - getting all Keywords');
+
+        connection = await getConnection();
+
+        if (!connection) {
+            throw new Error('No database connection available.');
+        }
+
+        // Abrufen von Keywords und deren verantwortlichen Personen in einer einzigen Abfrage
+        const [rows] = await connection.execute(`
+            SELECT k.id AS keyword_id, k.name AS keyword_name, k.department AS keyword_department,
+                   p.id AS person_id, p.name AS person_name, p.email AS person_email
+            FROM Keywords k
+            LEFT JOIN Keyword_Person_Responsibilities kpr ON k.id = kpr.keyword_id
+            LEFT JOIN Persons p ON p.id = kpr.person_id
+        `);
+
+        // Verarbeite die Daten
+        const keywordMap = {};
+
+        rows.forEach(row => {
+            if (!keywordMap[row.keyword_id]) {
+                keywordMap[row.keyword_id] = {
+                    id: row.keyword_id,
+                    name: row.keyword_name,
+                    department: row.keyword_department,
+                    responsiblePersons: []
+                };
+            }
+
+            if (row.person_id) {
+                keywordMap[row.keyword_id].responsiblePersons.push({
+                    id: row.person_id,
+                    name: row.person_name,
+                    email: row.person_email 
+                });
+            }
+        });
+
+        const result = Object.values(keywordMap);
+
+        // Filter nach Abteilung, falls angegeben
         const department = req.query.dep ? req.query.dep : undefined;
         if (department) {
-            jsonData = jsonData.filter((keyword) => keyword.department == department)
+            const filteredData = result.filter(keyword => keyword.department === department);
+            res.json(filteredData);
+        } else {
+            res.json(result);
         }
-        res.json(jsonData);
-    } catch(err) {
-        logger.error('Error reading or parsing the file:', err);
+    } catch (err) {
+        logger.error('Error retrieving keywords and responsible persons:', err);
         res.status(500).send('Internal Server Error');
     }
 };
 
-const getAllKeywords = async () => {
+const getAllKeywords = async (department) => {
     try {
-        const data = await fs.readFile('data\\keywords.json');
-        return JSON.parse(data);
-    } catch (err) {
-        logger.error('Error reading or parsing the file:', err);
-        throw err; // Um den Fehler an den Aufrufer weiterzugeben
-    }
-};
+        const connection = getConnection();
+            
+        if (!connection) throw new Error('No database connection available.');
 
-const updateById = async (req, res, next) => {
+        const [rows] = await connection.execute('SELECT * FROM Keywords');   
+
+        if (department) {
+            const filteredData = rows.filter((keyword) => keyword.department === department);
+            return filteredData;
+        } else {
+            return rows;
+        }
+    } catch(err) {
+        logger.error('Error reading or parsing the file:', err);
+        throw err;
+    }
+}
+
+const updateById = async (req, res, next) => { //TODO UPDATE (through DB Connection)
     try {
         console.log("jkdnsldjnfskgjb")
         const keywordId = +req.params.id;
