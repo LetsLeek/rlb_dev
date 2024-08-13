@@ -113,9 +113,6 @@ app.post('/api/sqltest/keywords', sqlHandler.createKeyword);
 
 /******************  KEYWORDS  ******************/
 app.get("/api/keywords", keywordHandler.getAll);
-// app.get("/api/keywords?dep=NET", keywordHandler.getAll);
-// app.get("/api/keywords?dep=IT", keywordHandler.getAll);
-// app.get("/api/keywords?dep=PROD", keywordHandler.getAll);
 app.post("/api/keywords", keywordHandler.create);
 app.put("/api/keywords/:id", keywordHandler.updateById);
 

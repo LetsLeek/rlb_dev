@@ -135,7 +135,11 @@ async function fillDemoData() {
     } catch (err) {
         if (connection) await connection.rollback();
         logger.error('Error while filling demo data:', err);
-    } 
+    } finally {
+        if (connection) {
+            await connection.end(); // Verbindung schließen
+        }
+    }
 }
 
 // Script ausführen

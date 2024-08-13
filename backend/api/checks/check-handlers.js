@@ -26,13 +26,12 @@ const getRemarkAndStateForDate = (date) => {
   const dayOfWeek = date.getDay();
 
   if (holiday) {
-    return { remark: "HOLIDAY", state: holiday.name };
+    return { remark: "HOLIDAY", state: holiday[0].name || "Feiertag" };
   } else if (dayOfWeek === 0 || dayOfWeek === 6) {
     // 0 für Sonntag, 6 für Samstag
     return { remark: "WEEKEND", state: getDayName(dayOfWeek) };
   } else {
-    return {remark: "", state: ""};
-    // return { remark: getDayName(dayOfWeek), state: "" };
+    return {remark: "", state: "In Progress"};
   }
 };
 
@@ -49,7 +48,7 @@ async function formateCurrentDate(date) {
 }
 
 // Die aktualisierte postObject-Funktion
-const postObjects = async (req, res) => {
+const postObjects = async () => {
   let connection;
 
   try {
@@ -63,7 +62,7 @@ const postObjects = async (req, res) => {
       // "currentDate" und "nextDay" bleiben unverändert
       const currentDate = new Date();
       const nextDay = new Date(currentDate);
-      nextDay.setDate(currentDate.getDate() + 2);
+      nextDay.setDate(currentDate.getDate() + 1);
       const formattedDate = await formateCurrentDate(nextDay);
       const remarkAndState = getRemarkAndStateForDate(nextDay);
 
@@ -111,7 +110,7 @@ const postObjects = async (req, res) => {
           if (keywords.length > 0) {
               const values = keywords.map(keyword => [checkId, keyword.id]);
               await connection.query(
-                  'INSERT INTO Check_Keywords (check_id, keyword_id) VALUES ?',
+                  'INSERT INTO Check_Keyword (check_id, keyword_id) VALUES ?',
                   [values]
               );
           }
@@ -120,11 +119,8 @@ const postObjects = async (req, res) => {
       await insertKeywords(itCheckId, keywordsIT);
       await insertKeywords(prodCheckId, keywordsPROD);
       await insertKeywords(netCheckId, keywordsNET);
-
-      res.status(201).send("Checks successfully created");
   } catch (err) {
       logger.error("Error processing the request:", err);
-      res.status(500).send("Internal Server Error");
   }
 };
   
@@ -179,7 +175,7 @@ const createCheck = async (req, res, next) => {
       if (currKeywords.length > 0) {
           const values = currKeywords.map(keyword => [newCheckId, keyword.id]);
           await connection.query(
-              'INSERT INTO Check_Keywords (check_id, keyword_id) VALUES ?',
+              'INSERT INTO Check_Keyword (check_id, keyword_id) VALUES ?',
               [values]
           );
       }
@@ -301,11 +297,11 @@ const getById = async (req, res) => {
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const seconds = date.getSeconds().toString().padStart(2, '0');
+    // const hours = date.getHours().toString().padStart(2, '0');
+    // const minutes = date.getMinutes().toString().padStart(2, '0');
+    // const seconds = date.getSeconds().toString().padStart(2, '0');
   
-    return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+    return `${day}.${month}.${year}`;
   };
   
   
@@ -388,14 +384,8 @@ const getById = async (req, res) => {
   
 
 module.exports = {
-  // getAllChecksIT,
-  // getAllChecksNET,
-  // getAllChecksPROD,
   getAllChecks,
   createCheck,
-  // createCheckIT,
-  // createCheckNET,
-  // createCheckPROD,
   getById,
   postObjects,
   getCheckByDate,

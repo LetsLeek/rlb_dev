@@ -17,7 +17,6 @@ POST {{baseurl}}/checks
 Content-Type: application/json
 
 {
-
     "date": "",
     "state": "",
     "isChecked": false,
