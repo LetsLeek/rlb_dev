@@ -123,9 +123,9 @@ async function fillDemoData() {
         // Einfügen von Checks
         const checksQuery = `
             INSERT INTO Checks (date, state, isChecked, department) VALUES
-            ('2024-08-12', 'Completed', TRUE, 'IT'),
-            ('2024-08-12', 'Pending', FALSE, 'NET'),
-            ('2024-08-12', 'In Progress', FALSE, 'Produktion');
+            ('13.08.2024', 'Completed', TRUE, 'IT'),
+            ('13.08.2024', 'Pending', FALSE, 'NET'),
+            ('13.08.2024', 'In Progress', FALSE, 'Produktion');
         `;
         await connection.query(checksQuery);
 
@@ -135,11 +135,7 @@ async function fillDemoData() {
     } catch (err) {
         if (connection) await connection.rollback();
         logger.error('Error while filling demo data:', err);
-    } finally {
-        if (connection) {
-            await connection.end(); // Verbindung schließen
-        }
-    }
+    } 
 }
 
 // Script ausführen

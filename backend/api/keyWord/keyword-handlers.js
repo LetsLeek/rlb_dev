@@ -76,19 +76,52 @@ const getAllKeywords = async (department) => {
             
         if (!connection) throw new Error('No database connection available.');
 
-        const [rows] = await connection.execute('SELECT * FROM Keywords');   
+        // Abrufen von Keywords und deren verantwortlichen Personen in einer einzigen Abfrage
+        const [rows] = await connection.execute(`
+            SELECT k.id AS keyword_id, k.name AS keyword_name, k.department AS keyword_department,
+                   p.id AS person_id, p.name AS person_name, p.email AS person_email
+            FROM Keywords k
+            LEFT JOIN Keyword_Person_Responsibilities kpr ON k.id = kpr.keyword_id
+            LEFT JOIN Persons p ON p.id = kpr.person_id
+        `);
 
+        // Verarbeite die Daten
+        const keywordMap = {};
+
+        rows.forEach(row => {
+            if (!keywordMap[row.keyword_id]) {
+                keywordMap[row.keyword_id] = {
+                    id: row.keyword_id,
+                    name: row.keyword_name,
+                    department: row.keyword_department,
+                    responsiblePersons: []
+                };
+            }
+
+            if (row.person_id) {
+                keywordMap[row.keyword_id].responsiblePersons.push({
+                    id: row.person_id,
+                    name: row.person_name,
+                    email: row.person_email 
+                });
+            }
+        });
+
+        const result = Object.values(keywordMap);
+
+        // Filter nach Abteilung, falls angegeben
         if (department) {
-            const filteredData = rows.filter((keyword) => keyword.department === department);
+            const filteredData = result.filter(keyword => keyword.department === department);
             return filteredData;
         } else {
-            return rows;
+            return result;
         }
     } catch(err) {
-        logger.error('Error reading or parsing the file:', err);
+        logger.error('Error retrieving keywords:', err);
         throw err;
     }
 }
+
 
 const updateById = async (req, res, next) => { //TODO UPDATE (through DB Connection)
     try {
@@ -184,5 +217,5 @@ module.exports = {
     getAll,
     getAllKeywords,
     create,
-    updateById
+    updateById //TODO NOT DONE (udpateById KEYWORDS)
 };

@@ -123,14 +123,10 @@ app.put("/api/keywords/:id", keywordHandler.updateById);
 app.get("/api/persons", personHandler.getAll);
 
 /******************  CHECKS  ******************/
-app.get("/api/checks/it", checkHandler.getAllChecksIT);
-app.get("/api/checks/prod", checkHandler.getAllChecksPROD);
-app.get("/api/checks/net", checkHandler.getAllChecksNET);
+app.get("/api/checks", checkHandler.getAllChecks);
 app.get("/api/checks/:id", checkHandler.getById);
 app.put("/api/checks/", checkHandler.checkUpdate)
-app.post("/api/checks/it", checkHandler.createCheckIT);
-app.post("/api/checks/prod", checkHandler.createCheckPROD);
-app.post("/api/checks/net", checkHandler.createCheckNET);
+app.post("/api/checks", checkHandler.createCheck);
 app.get('/api/checks/date/:date', checkHandler.getCheckByDate);
 
 /******************  MAILS  ******************/
