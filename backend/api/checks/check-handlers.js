@@ -192,49 +192,122 @@ const getAllChecks = async (req, res) => {
   let connection;
 
   try {
-      // Verbindung zur Datenbank herstellen
-      connection = await getConnection();
+    // Verbindung zur Datenbank herstellen
+    connection = await getConnection();
 
-      if (!connection) {
-          throw new Error('No database connection available.');
+    if (!connection) {
+      throw new Error('No database connection available.');
+    }
+
+    // Department aus der Anfrage extrahieren
+    const department = req.query.department;
+    if (!department) {
+      return res.status(400).send('Department is required');
+    }
+
+    // Abruf der Checks für das angegebene Department
+    const [checks] = await connection.query(`
+      SELECT 
+        id,
+        date,
+        state,
+        isChecked,
+        remark,
+        department
+      FROM Checks
+      WHERE department = ?
+    `, [department]);
+
+    // Falls keine Checks gefunden werden, gibt eine leere Antwort zurück
+    if (checks.length === 0) {
+      return res.json([]);
+    }
+
+    // Abruf der Keywords für die Checks
+    const checkIds = checks.map(check => check.id);
+    const [checkKeywords] = await connection.query(`
+      SELECT 
+        ck.check_id,
+        k.id AS keyword_id,
+        k.name AS keyword,
+        k.control,
+        k.checkedByPersonId,
+        k.checkedByDate
+      FROM Check_Keyword ck
+      JOIN Keywords k ON ck.keyword_id = k.id
+      WHERE ck.check_id IN (?)
+    `, [checkIds]);
+
+    // Abruf der verantwortlichen Personen für die Keywords
+    const keywordIds = checkKeywords.map(keyword => keyword.keyword_id);
+    const [keywordPersons] = await connection.query(`
+      SELECT 
+        kpr.keyword_id,
+        p.id AS person_id,
+        p.name AS person_name,
+        p.email AS person_email
+      FROM keyword_person_responsibilities kpr
+      JOIN Persons p ON kpr.person_id = p.id
+      WHERE kpr.keyword_id IN (?)
+    `, [keywordIds]);
+
+    // Strukturierung der Daten
+    const keywordPersonMap = keywordPersons.reduce((acc, { keyword_id, person_id, person_name, person_email }) => {
+      if (!acc[keyword_id]) {
+        acc[keyword_id] = [];
       }
-
-      // Department aus der Anfrage extrahieren
-      const department = req.query.department;
-      if (!department) {
-          return res.status(400).send('Department is required');
-      }
-
-      // Abruf der Checks für das angegebene Department
-      const [checks] = await connection.query(`
-          SELECT 
-              id,
-              date,
-              state,
-              isChecked,
-              remark,
-              department
-          FROM Checks
-          WHERE department = ?
-      `, [department]);
-
-      // Abruf der zugehörigen Keywords
-      const keywords = await getAllKeywords(department);
-
-      // Strukturierung der Daten
-      const result = checks.map(check => {
-          return {
-              ...check,
-              keyWords: keywords
-          };
+      acc[keyword_id].push({
+        id: person_id,
+        name: person_name,
+        email: person_email
       });
+      return acc;
+    }, {});
 
-      res.json(result);
+    // Abruf der Check-Details für die verantwortlichen Personen
+    const [persons] = await connection.query(`
+      SELECT 
+        id,
+        name,
+        email
+      FROM Persons
+      WHERE id IN (SELECT DISTINCT checkedByPersonId FROM Keywords WHERE checkedByPersonId IS NOT NULL)
+    `);
+
+    // Strukturierung der Keywords nach Check
+    const checkKeywordMap = checkKeywords.reduce((acc, { check_id, keyword_id, keyword, control, checkedByPersonId, checkedByDate }) => {
+      if (!acc[check_id]) {
+        acc[check_id] = [];
+      }
+      acc[check_id].push({
+        id: keyword_id,
+        name: keyword,
+        department: department,
+        control: control,
+        responsiblePersons: keywordPersonMap[keyword_id] || [],
+        checkedBy: {
+          person: persons.find(person => person.id === checkedByPersonId) || null,
+          date: checkedByDate || null
+        }
+      });
+      return acc;
+    }, {});
+
+    // Strukturierung der Daten
+    const result = checks.map(check => {
+      return {
+        ...check,
+        keyWords: checkKeywordMap[check.id] || []
+      };
+    });
+
+    res.json(result);
   } catch (err) {
-      logger.error('Error retrieving checks:', err);
-      res.status(500).send('Internal Server Error');
+    logger.error('Error retrieving checks:', err);
+    res.status(500).send('Internal Server Error');
   }
 };
+
 
 
 const getById = async (req, res) => {
