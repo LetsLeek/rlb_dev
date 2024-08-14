@@ -133,7 +133,7 @@ const getAllKeywords = async (department) => {
         logger.error('Error retrieving keywords:', err);
         throw err;
     }
-};
+}; // TODO control if unnecessary
 
 const updateById = async (req, res, next) => {
     try {
