@@ -121,10 +121,10 @@ async function fillDemoData() {
         `;
         await connection.query(responsibilitiesQuery);
 
-        // Einfügen von Checks
+        // Einfügen von Checks (set on false)
         const checksQuery = `
             INSERT INTO Checks (date, state, isChecked, department) VALUES
-            ('13.08.2024', 'Completed', TRUE, 'IT'),
+            ('13.08.2024', 'Completed', FALSE, 'IT'),
             ('13.08.2024', 'Pending', FALSE, 'NET'),
             ('13.08.2024', 'In Progress', FALSE, 'Produktion');
         `;
