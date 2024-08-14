@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env LOG_LEVEL=debug nodemon server.js",
+    "fill-demo-data": "node ./db/fill-demo-data.js",
     "start": "node server.js"
   },
   "author": "MIG [Mathias Ioan Gombos]",
@@ -24,6 +25,8 @@
     "date-holidays": "^3.23.12",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.0",
     "winston": "^3.13.0"
   },
   "directories": {

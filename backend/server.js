@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 /* ***************** IMPORT LIBS *************************** */
 const { logger } = require("./logging/log");
 const DEFAULTS = require("./config/defaults.json");
+const database = require('./db/database');
 
 /* ***************** IMPORT AUTH *************************** */
 const {
@@ -31,10 +32,21 @@ const keywordHandler = require("./api/keyWord/keyword-handlers");
 const personHandler = require("./api/persons/person-handlers");
 const checkHandler = require("./api/checks/check-handlers");
 const mailHandler = require("./api/mails/mail-handlers");
+const sqlHandler = require('./api/sqlDataTest#/sql-handlers');
 
 /* ***************** CONFIG and CONSTS ********************* */
 const HOSTNAME = "0.0.0.0";
 const PORT = process.env.PORT || DEFAULTS.PORT;
+
+const MYSQL_CONFIG = {
+  host: 'localhost',
+  user: 'root',
+  password: 'hannah2020',
+  database: 'checkdb',
+  port: 3306
+};
+const MYSQL_RECREATE = process.env.MYSQL_RECREATE === "true";
+
 const secret = 'secret_key'; //TODO Secret key name bestimmen
 
 /* ***************** START UP ******************************* */
@@ -95,11 +107,12 @@ function restrictTo(...roles) {
 
 //=========================== register all endpoints
 
+/******************  SQLTEST  ******************/
+app.get('/api/sqltest', sqlHandler.getAll);
+app.post('/api/sqltest/keywords', sqlHandler.createKeyword);
+
 /******************  KEYWORDS  ******************/
 app.get("/api/keywords", keywordHandler.getAll);
-// app.get("/api/keywords?dep=NET", keywordHandler.getAll);
-// app.get("/api/keywords?dep=IT", keywordHandler.getAll);
-// app.get("/api/keywords?dep=PROD", keywordHandler.getAll);
 app.post("/api/keywords", keywordHandler.create);
 app.put("/api/keywords/:id", keywordHandler.updateById);
 
@@ -107,14 +120,10 @@ app.put("/api/keywords/:id", keywordHandler.updateById);
 app.get("/api/persons", personHandler.getAll);
 
 /******************  CHECKS  ******************/
-app.get("/api/checks/it", checkHandler.getAllChecksIT);
-app.get("/api/checks/prod", checkHandler.getAllChecksPROD);
-app.get("/api/checks/net", checkHandler.getAllChecksNET);
+app.get("/api/checks", checkHandler.getAllChecks);
 app.get("/api/checks/:id", checkHandler.getById);
-app.put("/api/checks/", checkHandler.checkUpdate)
-app.post("/api/checks/it", checkHandler.createCheckIT);
-app.post("/api/checks/prod", checkHandler.createCheckPROD);
-app.post("/api/checks/net", checkHandler.createCheckNET);
+app.put("/api/checks/", checkHandler.updateCheck)
+app.post("/api/checks", checkHandler.createCheck);
 app.get('/api/checks/date/:date', checkHandler.getCheckByDate);
 
 /******************  MAILS  ******************/
@@ -130,6 +139,14 @@ app.get("*", (_req, res) => {
 // create HTTP server
 logger.info("Backend - Starting up ...");
 const httpServer = http.createServer(app);
+
+// establish DB connection (app crashs if connect to db fails)
+database.createConnection(MYSQL_CONFIG, MYSQL_RECREATE);
+
+// add function(s) so that they are accessible by tests
+httpServer.dropCurrentDatabase = async () => {
+  await database.dropCurrentDB(MYSQL_CONFIG);
+}
 
 // start listening to HTTP requests
 httpServer.listen(PORT, HOSTNAME, () => {

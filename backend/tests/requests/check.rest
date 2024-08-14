@@ -17,7 +17,6 @@ POST {{baseurl}}/checks
 Content-Type: application/json
 
 {
-
     "date": "",
     "state": "",
     "isChecked": false,
@@ -25,25 +24,212 @@ Content-Type: application/json
 }
 ### PUT
 
-PUT {{baseurl}}/checks?dep=IT&id=1
+PUT {{baseurl}}/checks?dep=NET&id=2
 Content-Type: application/json
 
 {
-  "date": "05.08.2024 14:30:00",
-  "state": "updated state",
-  "isChecked": true,
-  "keyWords": [
-    {
-      "name": "updated keyword",
-      "checkedBy": {
-        "person": { "name": "John Doe" },
-        "date": "2024-08-05T14:30:00Z",
-        "department": "IT"
-      }
-    }
-  ],
-  "remark": "updated remark",
-  "department": "IT",
-  "id": 1
+"id": 2,
+"date": "14.08.2024",
+"state": "Pending",
+"isChecked": 0,
+"remark": null,
+"department": "NET",
+"keyWords": [
+{
+"id": 11,
+"name": "Bandwidth Monitoring",
+"department": "NET",
+"control": "daily",
+"responsiblePersons": [
+{
+"id": 11,
+"name": "Andrei Ureche",
+"email": "andreiureche@outlook.com"
+},
+{
+"id": 15,
+"name": "Ema Muthi",
+"email": "emamuthi@outlook.com"
+},
+{
+"id": 19,
+"name": "Emily Davis",
+"email": "emilydavis@outlook.com"
 }
+],
+"checkedBy": {
+"person": {
+    "id": 6,
+    "name": "Mathias Gombos",
+    "email": "mathiasgombos@outlook.com"
+  },
+  "date": "13.08.2024 13:24:21"
+}
+},
+{
+"id": 12,
+"name": "Firewall Rules Review",
+"department": "NET",
+"control": "weekly_firstworkday",
+"responsiblePersons": [
+{
+"id": 11,
+"name": "Andrei Ureche",
+"email": "andreiureche@outlook.com"
+},
+{
+"id": 12,
+"name": "Simon Pantea",
+"email": "simonpantea@outlook.com"
+},
+{
+"id": 20,
+"name": "Nelu Juratoni",
+"email": "nelujuratoni@outlook.com"
+}
+],
+"checkedBy": {
+"person": null,
+"date": null
+}
+},
+{
+"id": 13,
+"name": "VPN Configuration",
+"department": "NET",
+"control": "daily",
+"responsiblePersons": [
+{
+"id": 13,
+"name": "Matthew Garcia",
+"email": "matthewgarcia@outlook.com"
+}
+],
+"checkedBy": {
+"person": null,
+"date": null
+}
+},
+{
+"id": 14,
+"name": "Network Security Assessment",
+"department": "NET",
+"control": "weekly_firstworkday",
+"responsiblePersons": [
+{
+"id": 14,
+"name": "Alimi Assimov",
+"email": "alimiassimov@outlook.com"
+},
+{
+"id": 17,
+"name": "David Ichim",
+"email": "davidichim@outlook.com"
+}
+],
+"checkedBy": {
+"person": null,
+"date": null
+}
+},
+{
+"id": 15,
+"name": "Switch Configuration Check",
+"department": "NET",
+"control": "daily",
+"responsiblePersons": [
+{
+"id": 12,
+"name": "Simon Pantea",
+"email": "simonpantea@outlook.com"
+},
+{
+"id": 13,
+"name": "Matthew Garcia",
+"email": "matthewgarcia@outlook.com"
+},
+{
+"id": 14,
+"name": "Alimi Assimov",
+"email": "alimiassimov@outlook.com"
+},
+{
+"id": 15,
+"name": "Ema Muthi",
+"email": "emamuthi@outlook.com"
+}
+],
+"checkedBy": {
+"person": null,
+"date": null
+}
+},
+{
+"id": 16,
+"name": "Router Firmware Update",
+"department": "NET",
+"control": "weekly_firstworkday",
+"responsiblePersons": [
+{
+"id": 16,
+"name": "Sarah Wilson",
+"email": "sarahwilson@outlook.com"
+}
+],
+"checkedBy": {
+"person": null,
+"date": null
+}
+},
+{
+"id": 17,
+"name": "Network Backup Verification",
+"department": "NET",
+"control": "daily",
+"responsiblePersons": [
+{
+"id": 17,
+"name": "David Ichim",
+"email": "davidichim@outlook.com"
+},
+{
+"id": 20,
+"name": "Nelu Juratoni",
+"email": "nelujuratoni@outlook.com"
+}
+],
+"checkedBy": {
+"person": null,
+"date": null
+}
+},
+{
+"id": 18,
+"name": "IP Address Management",
+"department": "NET",
+"control": "weekly_firstworkday",
+"responsiblePersons": [
+{
+"id": 15,
+"name": "Ema Muthi",
+"email": "emamuthi@outlook.com"
+},
+{
+"id": 18,
+"name": "Kristin White",
+"email": "kristinwhite@outlook.com"
+},
+{
+"id": 19,
+"name": "Emily Davis",
+"email": "emilydavis@outlook.com"
+}
+],
+"checkedBy": {
+"person": null,
+"date": null
+}
+}
+]
+}     
 

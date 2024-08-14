@@ -1,1 +1,1418 @@
-[{"date":"02.08.2024 14:39:00","state":"","isChecked":false,"keyWords":[{"id":1,"name":"System Logs Review","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"}]},{"id":2,"name":"Database Backup","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":3,"name":"Server Maintenance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":4,"name":"Application Updates","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":5,"name":"Network Security Audit","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":6,"name":"User Account Management","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":7,"name":"Disk Space Monitoring","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":8,"name":"System Performance Check","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":9,"name":"Software License Compliance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":10,"name":"IT Asset Inventory","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]}],"remark":"Freitag","department":"IT","id":0},{"date":"03.08.2024 09:43:00","state":"Samstag","isChecked":false,"keyWords":[{"id":2,"name":"Database Backup","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":3,"name":"Server Maintenance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":4,"name":"Application Updates","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":5,"name":"Network Security Audit","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":6,"name":"User Account Management","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":7,"name":"Disk Space Monitoring","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":8,"name":"System Performance Check","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":9,"name":"Software License Compliance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":10,"name":"IT Asset Inventory","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":1,"name":"System Logs Review","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"}]}],"remark":"WEEKEND","department":"IT","id":1},{"date":"06.08.2024 09:43:00","state":"","isChecked":false,"keyWords":[{"id":2,"name":"Database Backup","control":"weekly_firstworkday","checkedBy":{"person":{"name":"Mathias Gombos"},"date":"06.08.2024 08:56:25","department":"IT"},"department":"IT","responsiblePersons":[{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":3,"name":"Server Maintenance","control":"monthly_lastday","checkedBy":{"person":{"name":"Mathias Gombos"},"date":"06.08.2024 14:55:39","department":"IT"},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":4,"name":"Application Updates","control":"quarterly_firstday","checkedBy":{"person":{"name":"Mathias Gombos"},"date":"07.08.2024 07:32:34","department":"IT"},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":5,"name":"Network Security Audit","control":"quarterly_firstday","checkedBy":{"person":{"name":"Mathias Gombos"},"date":"10.08.2024 21:05:34","department":"IT"},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":6,"name":"User Account Management","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":7,"name":"Disk Space Monitoring","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":8,"name":"System Performance Check","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":9,"name":"Software License Compliance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":10,"name":"IT Asset Inventory","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":1,"name":"System Logs Review","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"}]}],"remark":"Dienstag","department":"IT","id":2},{"date":"07.08.2024 09:43:00","state":"","isChecked":false,"keyWords":[{"id":2,"name":"Database Backup","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":3,"name":"Server Maintenance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":4,"name":"Application Updates","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":5,"name":"Network Security Audit","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":6,"name":"User Account Management","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":7,"name":"Disk Space Monitoring","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":8,"name":"System Performance Check","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":9,"name":"Software License Compliance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":10,"name":"IT Asset Inventory","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":1,"name":"System Logs Review","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"}]},{"id":29,"name":"Daria","responsiblePersons":[{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"},{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Matthew Garcia","email":"matthewgarcia@outlook.com","department":"IT"}],"control":"daily","department":"IT","checkedBy":{"person":null,"date":null}}],"remark":"Mittwoch","department":"IT","id":3},{"date":"12.08.2024 09:46:40","state":"","isChecked":false,"keyWords":[{"id":2,"name":"Database Backup","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":3,"name":"Server Maintenance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":4,"name":"Application Updates","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":5,"name":"Network Security Audit","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":6,"name":"User Account Management","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":7,"name":"Disk Space Monitoring","control":"weekly_firstworkday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"},{"name":"Sarah Wilson","email":"sarahwilson@outlook.com","department":"IT"}]},{"id":8,"name":"System Performance Check","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Laura Thompson","email":"laurathompson@outlook.com","department":"IT"}]},{"id":9,"name":"Software License Compliance","control":"monthly_lastday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"}]},{"id":10,"name":"IT Asset Inventory","control":"quarterly_firstday","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"Michael Johnson","email":"michaeljohnson@outlook.com","department":"IT"}]},{"id":1,"name":"System Logs Review","control":"daily","checkedBy":{"person":null,"date":null},"department":"IT","responsiblePersons":[{"name":"John Doe","email":"johndoe@outlook.com","department":"IT"},{"name":"Jane Smith","email":"janesmith@outlook.com","department":"IT"},{"name":"David Brown","email":"davidbrown@outlook.com","department":"IT"}]},{"id":29,"name":"Daria","responsiblePersons":[{"name":"Emily Davis","email":"emilydavis@outlook.com","department":"IT"},{"name":"Ryan Martinez","email":"ryanmartinez@outlook.com","department":"IT"},{"name":"Matthew Garcia","email":"matthewgarcia@outlook.com","department":"IT"}],"control":"daily","department":"IT","checkedBy":{"person":null,"date":null}}],"remark":"Montag","department":"IT","id":4}]
+[
+  {
+    "date": "02.08.2024 14:39:00",
+    "state": "",
+    "isChecked": false,
+    "keyWords": [
+      {
+        "id": 1,
+        "name": "System Logs Review",
+        "control": "daily",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Database Backup",
+        "control": "weekly_firstworkday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Server Maintenance",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Application Updates",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Network Security Audit",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "User Account Management",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Disk Space Monitoring",
+        "control": "weekly_firstworkday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "System Performance Check",
+        "control": "daily",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Software License Compliance",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "IT Asset Inventory",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      }
+    ],
+    "remark": "Freitag",
+    "department": "IT",
+    "id": 0
+  },
+  {
+    "date": "03.08.2024 09:43:00",
+    "state": "Samstag",
+    "isChecked": false,
+    "keyWords": [
+      {
+        "id": 2,
+        "name": "Database Backup",
+        "control": "weekly_firstworkday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Server Maintenance",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Application Updates",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Network Security Audit",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "User Account Management",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Disk Space Monitoring",
+        "control": "weekly_firstworkday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "System Performance Check",
+        "control": "daily",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Software License Compliance",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "IT Asset Inventory",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "System Logs Review",
+        "control": "daily",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          }
+        ]
+      }
+    ],
+    "remark": "WEEKEND",
+    "department": "IT",
+    "id": 1
+  },
+  {
+    "date": "06.08.2024 09:43:00",
+    "state": "",
+    "isChecked": true,
+    "keyWords": [
+      {
+        "id": 2,
+        "name": "Database Backup",
+        "control": "weekly_firstworkday",
+        "checkedBy": {
+          "person": { "name": "Mathias Gombos" },
+          "date": "06.08.2024 08:56:25",
+          "department": "IT"
+        },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Server Maintenance",
+        "control": "monthly_lastday",
+        "checkedBy": {
+          "person": { "name": "Mathias Gombos" },
+          "date": "06.08.2024 14:55:39",
+          "department": "IT"
+        },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Application Updates",
+        "control": "quarterly_firstday",
+        "checkedBy": {
+          "person": { "name": "Mathias Gombos" },
+          "date": "07.08.2024 07:32:34",
+          "department": "IT"
+        },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Network Security Audit",
+        "control": "quarterly_firstday",
+        "checkedBy": {
+          "person": { "name": "Mathias Gombos" },
+          "date": "10.08.2024 21:05:34",
+          "department": "IT"
+        },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "User Account Management",
+        "control": "monthly_lastday",
+        "checkedBy": {
+          "person": { "name": "Mathias Gombos" },
+          "date": "12.08.2024 15:46:52",
+          "department": "IT"
+        },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Disk Space Monitoring",
+        "control": "weekly_firstworkday",
+        "checkedBy": {
+          "person": { "name": "Mathias Gombos" },
+          "date": "12.08.2024 15:46:55",
+          "department": "IT"
+        },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "System Performance Check",
+        "control": "daily",
+        "checkedBy": {
+          "person": { "name": "Mathias Gombos" },
+          "date": "12.08.2024 15:46:58",
+          "department": "IT"
+        },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Software License Compliance",
+        "control": "monthly_lastday",
+        "checkedBy": {
+          "person": { "name": "Mathias Gombos" },
+          "date": "12.08.2024 15:47:01",
+          "department": "IT"
+        },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "IT Asset Inventory",
+        "control": "quarterly_firstday",
+        "checkedBy": {
+          "person": { "name": "Mathias Gombos" },
+          "date": "12.08.2024 15:47:05",
+          "department": "IT"
+        },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "System Logs Review",
+        "control": "daily",
+        "checkedBy": {
+          "person": { "name": "Mathias Gombos" },
+          "date": "12.08.2024 15:47:16",
+          "department": "IT"
+        },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          }
+        ]
+      }
+    ],
+    "remark": "Dienstag",
+    "department": "IT",
+    "id": 2
+  },
+  {
+    "date": "07.08.2024 09:43:00",
+    "state": "",
+    "isChecked": false,
+    "keyWords": [
+      {
+        "id": 2,
+        "name": "Database Backup",
+        "control": "weekly_firstworkday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Server Maintenance",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Application Updates",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Network Security Audit",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "User Account Management",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Disk Space Monitoring",
+        "control": "weekly_firstworkday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "System Performance Check",
+        "control": "daily",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Software License Compliance",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "IT Asset Inventory",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "System Logs Review",
+        "control": "daily",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 29,
+        "name": "Daria",
+        "responsiblePersons": [
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Matthew Garcia",
+            "email": "matthewgarcia@outlook.com",
+            "department": "IT"
+          }
+        ],
+        "control": "daily",
+        "department": "IT",
+        "checkedBy": { "person": null, "date": null }
+      }
+    ],
+    "remark": "Mittwoch",
+    "department": "IT",
+    "id": 3
+  },
+  {
+    "date": "12.08.2024 09:46:40",
+    "state": "",
+    "isChecked": false,
+    "keyWords": [
+      {
+        "id": 2,
+        "name": "Database Backup",
+        "control": "weekly_firstworkday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Server Maintenance",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Application Updates",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Network Security Audit",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "User Account Management",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Disk Space Monitoring",
+        "control": "weekly_firstworkday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "System Performance Check",
+        "control": "daily",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Software License Compliance",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "IT Asset Inventory",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "System Logs Review",
+        "control": "daily",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 29,
+        "name": "Daria",
+        "responsiblePersons": [
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Matthew Garcia",
+            "email": "matthewgarcia@outlook.com",
+            "department": "IT"
+          }
+        ],
+        "control": "daily",
+        "department": "IT",
+        "checkedBy": { "person": null, "date": null }
+      }
+    ],
+    "remark": "Montag",
+    "department": "IT",
+    "id": 4
+  },
+  {
+    "date": "14.08.2024 09:43:00",
+    "state": "",
+    "isChecked": false,
+    "keyWords": [
+      {
+        "id": 2,
+        "name": "Database Backup",
+        "control": "weekly_firstworkday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Server Maintenance",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Application Updates",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Network Security Audit",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "User Account Management",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Disk Space Monitoring",
+        "control": "weekly_firstworkday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Sarah Wilson",
+            "email": "sarahwilson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "System Performance Check",
+        "control": "daily",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Laura Thompson",
+            "email": "laurathompson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Software License Compliance",
+        "control": "monthly_lastday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "name": "IT Asset Inventory",
+        "control": "quarterly_firstday",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Michael Johnson",
+            "email": "michaeljohnson@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "name": "System Logs Review",
+        "control": "daily",
+        "checkedBy": { "person": null, "date": null },
+        "department": "IT",
+        "responsiblePersons": [
+          {
+            "name": "John Doe",
+            "email": "johndoe@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Jane Smith",
+            "email": "janesmith@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "David Brown",
+            "email": "davidbrown@outlook.com",
+            "department": "IT"
+          }
+        ]
+      },
+      {
+        "id": 29,
+        "name": "Daria",
+        "responsiblePersons": [
+          {
+            "name": "Emily Davis",
+            "email": "emilydavis@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Ryan Martinez",
+            "email": "ryanmartinez@outlook.com",
+            "department": "IT"
+          },
+          {
+            "name": "Matthew Garcia",
+            "email": "matthewgarcia@outlook.com",
+            "department": "IT"
+          }
+        ],
+        "control": "daily",
+        "department": "IT",
+        "checkedBy": { "person": null, "date": null }
+      }
+    ],
+    "remark": "Mittwoch",
+    "department": "IT",
+    "id": 5
+  },
+  {
+    "date": "15.08.2024",
+    "isChecked": false,
+    "remark": "HOLIDAY",
+    "department": "IT",
+    "keyWords": [
+      {
+        "id": 1,
+        "name": "Database Backup",
+        "control": "daily",
+        "checkedBy": null,
+        "department": "IT"
+      },
+      {
+        "id": 2,
+        "name": "Server Maintenance",
+        "control": "weekly_firstday",
+        "checkedBy": null,
+        "department": "IT"
+      },
+      {
+        "id": 3,
+        "name": "Application Updates",
+        "control": "daily",
+        "checkedBy": null,
+        "department": "IT"
+      },
+      {
+        "id": 4,
+        "name": "Network Security Audit",
+        "control": "weekly_firstday",
+        "checkedBy": null,
+        "department": "IT"
+      },
+      {
+        "id": 5,
+        "name": "User Account Management",
+        "control": "daily",
+        "checkedBy": null,
+        "department": "IT"
+      },
+      {
+        "id": 6,
+        "name": "Disk Space Monitoring",
+        "control": "weekly_firstday",
+        "checkedBy": null,
+        "department": "IT"
+      },
+      {
+        "id": 7,
+        "name": "System Performance Check",
+        "control": "daily",
+        "checkedBy": null,
+        "department": "IT"
+      },
+      {
+        "id": 8,
+        "name": "Software License Compliance",
+        "control": "weekly_firstday",
+        "checkedBy": null,
+        "department": "IT"
+      },
+      {
+        "id": 9,
+        "name": "Daria",
+        "control": "daily",
+        "checkedBy": null,
+        "department": "IT"
+      },
+      {
+        "id": 10,
+        "name": "IT Asset Inventory",
+        "control": "weekly_firstday",
+        "checkedBy": null,
+        "department": "IT"
+      }
+    ],
+    "id": 6
+  }
+]

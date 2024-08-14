@@ -36,6 +36,26 @@ Content-Type: application/json
     "checkedBy": null
 }
 
+### SQLTEST
+POST {{baseurl}}/sqltest/keywords
+Content-Type: application/json
+
+{
+  "id": -1,
+  "name": "TESTTTTT",
+  "responsiblePersons": [
+    {
+      "id": 28,
+      "name": "Lois Gagea",
+      "email": "loisgagea@outlook.com",
+      "department": "Produktion"
+    }
+  ],
+  "control": "daily",
+  "department": "Produktion", 
+  "checkedBy": { "person": null, "date": null }
+}
+
 ### PUT keyword
 PUT {{baseurl}}/keywords/12
 Content-Type: application/json
