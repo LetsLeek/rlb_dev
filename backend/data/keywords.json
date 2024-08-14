@@ -1,1 +1,206 @@
-[{"id":1,"name":"Database Backup","control":"daily","checkedBy":null,"department":"IT"},{"id":2,"name":"Server Maintenance","control":"weekly_firstday","checkedBy":null,"department":"IT"},{"id":3,"name":"Application Updates","control":"daily","checkedBy":null,"department":"IT"},{"id":4,"name":"Network Security Audit","control":"weekly_firstday","checkedBy":null,"department":"IT"},{"id":5,"name":"User Account Management","control":"daily","checkedBy":null,"department":"IT"},{"id":6,"name":"Disk Space Monitoring","control":"weekly_firstday","checkedBy":null,"department":"IT"},{"id":7,"name":"System Performance Check","control":"daily","checkedBy":null,"department":"IT"},{"id":8,"name":"Software License Compliance","control":"weekly_firstday","checkedBy":null,"department":"IT"},{"id":9,"name":"Daria","control":"daily","checkedBy":null,"department":"IT"},{"id":10,"name":"IT Asset Inventory","control":"weekly_firstday","checkedBy":null,"department":"IT"},{"id":11,"name":"Bandwidth Monitoring","control":"daily","checkedBy":null,"department":"NET"},{"id":12,"name":"Firewall Rules Review","control":"weekly_firstday","checkedBy":null,"department":"NET"},{"id":13,"name":"VPN Configuration","control":"daily","checkedBy":null,"department":"NET"},{"id":14,"name":"Network Security Assessment","control":"weekly_firstday","checkedBy":null,"department":"NET"},{"id":15,"name":"Switch Configuration Check","control":"daily","checkedBy":null,"department":"NET"},{"id":16,"name":"Router Firmware Update","control":"weekly_firstday","checkedBy":null,"department":"NET"},{"id":17,"name":"Network Backup Verification","control":"daily","checkedBy":null,"department":"NET"},{"id":18,"name":"IP Address Management","control":"weekly_firstday","checkedBy":null,"department":"NET"},{"id":19,"name":"Work Safety Training","control":"daily","checkedBy":null,"department":"Produktion"},{"id":20,"name":"Equipment Calibration","control":"weekly_firstday","checkedBy":null,"department":"Produktion"},{"id":21,"name":"Daily Safety Equipment Check","control":"daily","checkedBy":null,"department":"Produktion"},{"id":22,"name":"Production Line Inspection","control":"weekly_firstday","checkedBy":null,"department":"Produktion"},{"id":23,"name":"Safety Equipment Check","control":"daily","checkedBy":null,"department":"Produktion"},{"id":24,"name":"Raw Materials Inventory","control":"weekly_firstday","checkedBy":null,"department":"Produktion"},{"id":25,"name":"Maintenance Logs Review","control":"daily","checkedBy":null,"department":"Produktion"},{"id":26,"name":"Compliance Inspection","control":"weekly_firstday","checkedBy":null,"department":"Produktion"},{"id":27,"name":"Quality Assurance","control":"daily","checkedBy":null,"department":"Produktion"},{"id":28,"name":"TESTTTTT","responsiblePersons":[{"id":28,"name":"Lois Gagea","email":"loisgagea@outlook.com","department":"Produktion"}],"control":"daily","department":"Produktion","checkedBy":{"person":null,"date":null}}]
+[
+  {
+    "id": 1,
+    "name": "Database Backup",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "IT"
+  },
+  {
+    "id": 2,
+    "name": "Server Maintenance",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "IT"
+  },
+  {
+    "id": 3,
+    "name": "Application Updates",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "IT"
+  },
+  {
+    "id": 4,
+    "name": "Network Security Audit",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "IT"
+  },
+  {
+    "id": 5,
+    "name": "User Account Management",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "IT"
+  },
+  {
+    "id": 6,
+    "name": "Disk Space Monitoring",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "IT"
+  },
+  {
+    "id": 7,
+    "name": "System Performance Check",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "IT"
+  },
+  {
+    "id": 8,
+    "name": "Software License Compliance",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "IT"
+  },
+  {
+    "id": 9,
+    "name": "Daria",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "IT"
+  },
+  {
+    "id": 10,
+    "name": "IT Asset Inventory",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "IT"
+  },
+  {
+    "id": 11,
+    "name": "Bandwidth Monitoring",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "NET"
+  },
+  {
+    "id": 12,
+    "name": "Firewall Rules Review",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "NET"
+  },
+  {
+    "id": 13,
+    "name": "VPN Configuration",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "NET"
+  },
+  {
+    "id": 14,
+    "name": "Network Security Assessment",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "NET"
+  },
+  {
+    "id": 15,
+    "name": "Switch Configuration Check",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "NET"
+  },
+  {
+    "id": 16,
+    "name": "Router Firmware Update",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "NET"
+  },
+  {
+    "id": 17,
+    "name": "Network Backup Verification",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "NET"
+  },
+  {
+    "id": 18,
+    "name": "IP Address Management",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "NET"
+  },
+  {
+    "id": 19,
+    "name": "Work Safety Training",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "Produktion"
+  },
+  {
+    "id": 20,
+    "name": "Equipment Calibration",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "Produktion"
+  },
+  {
+    "id": 21,
+    "name": "Daily Safety Equipment Check",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "Produktion"
+  },
+  {
+    "id": 22,
+    "name": "Production Line Inspection",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "Produktion"
+  },
+  {
+    "id": 23,
+    "name": "Safety Equipment Check",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "Produktion"
+  },
+  {
+    "id": 24,
+    "name": "Raw Materials Inventory",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "Produktion"
+  },
+  {
+    "id": 25,
+    "name": "Maintenance Logs Review",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "Produktion"
+  },
+  {
+    "id": 26,
+    "name": "Compliance Inspection",
+    "control": "weekly_firstday",
+    "checkedBy": null,
+    "department": "Produktion"
+  },
+  {
+    "id": 27,
+    "name": "Quality Assurance",
+    "control": "daily",
+    "checkedBy": null,
+    "department": "Produktion"
+  },
+  {
+    "id": 28,
+    "name": "TESTTTTT",
+    "responsiblePersons": [
+      {
+        "id": 28,
+        "name": "Lois Gagea",
+        "email": "loisgagea@outlook.com",
+        "department": "Produktion"
+      }
+    ],
+    "control": "daily",
+    "department": "Produktion",
+    "checkedBy": { "person": null, "date": null }
+  }
+]

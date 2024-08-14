@@ -12,27 +12,23 @@ const {
   } = require("../../middlewares/error-handling");
 
   const getAll = async (req, res, next) => {
-    let connection;
-
     try {
         logger.debug('Keywords - getting all Keywords');
 
-        connection = await getConnection();
+        const connection = getConnection();
 
-        if (!connection) {
-            throw new Error('No database connection available.');
-        }
+        if (!connection) throw new Error('No database connection available.');
 
-        // Abrufen von Keywords und deren verantwortlichen Personen in einer einzigen Abfrage
         const [rows] = await connection.execute(`
-            SELECT k.id AS keyword_id, k.name AS keyword_name, k.department AS keyword_department,
-                   p.id AS person_id, p.name AS person_name, p.email AS person_email
+            SELECT k.id AS keyword_id, k.name AS keyword_name, k.department AS keyword_department, k.control AS keyword_control,
+                   p.id AS person_id, p.name AS person_name, p.email AS person_email,
+                   k.checkedByPersonId, k.checkedByDate
             FROM Keywords k
             LEFT JOIN Keyword_Person_Responsibilities kpr ON k.id = kpr.keyword_id
             LEFT JOIN Persons p ON p.id = kpr.person_id
+            LEFT JOIN Persons cp ON k.checkedByPersonId = cp.id
         `);
 
-        // Verarbeite die Daten
         const keywordMap = {};
 
         rows.forEach(row => {
@@ -41,7 +37,16 @@ const {
                     id: row.keyword_id,
                     name: row.keyword_name,
                     department: row.keyword_department,
-                    responsiblePersons: []
+                    control: row.keyword_control,
+                    responsiblePersons: [],
+                    checkedBy: {
+                        person: row.checkedByPersonId ? {
+                            id: row.checkedByPersonId,
+                            name: row.person_name,
+                            email: row.person_email,
+                        } : null,
+                        date: row.checkedByDate || null,
+                    }
                 };
             }
 
@@ -49,7 +54,7 @@ const {
                 keywordMap[row.keyword_id].responsiblePersons.push({
                     id: row.person_id,
                     name: row.person_name,
-                    email: row.person_email 
+                    email: row.person_email
                 });
             }
         });
@@ -73,19 +78,19 @@ const {
 const getAllKeywords = async (department) => {
     try {
         const connection = getConnection();
-            
+
         if (!connection) throw new Error('No database connection available.');
 
-        // Abrufen von Keywords und deren verantwortlichen Personen in einer einzigen Abfrage
         const [rows] = await connection.execute(`
-            SELECT k.id AS keyword_id, k.name AS keyword_name, k.department AS keyword_department,
-                   p.id AS person_id, p.name AS person_name, p.email AS person_email
+            SELECT k.id AS keyword_id, k.name AS keyword_name, k.department AS keyword_department, k.control AS keyword_control,
+                   p.id AS person_id, p.name AS person_name, p.email AS person_email,
+                   k.checkedByPersonId, k.checkedByDate
             FROM Keywords k
             LEFT JOIN Keyword_Person_Responsibilities kpr ON k.id = kpr.keyword_id
             LEFT JOIN Persons p ON p.id = kpr.person_id
+            LEFT JOIN Persons cp ON k.checkedByPersonId = cp.id
         `);
 
-        // Verarbeite die Daten
         const keywordMap = {};
 
         rows.forEach(row => {
@@ -94,7 +99,16 @@ const getAllKeywords = async (department) => {
                     id: row.keyword_id,
                     name: row.keyword_name,
                     department: row.keyword_department,
-                    responsiblePersons: []
+                    control: row.keyword_control,
+                    responsiblePersons: [],
+                    checkedBy: {
+                        person: row.checkedByPersonId ? {
+                            id: row.checkedByPersonId,
+                            name: row.person_name,
+                            email: row.person_email,
+                        } : null,
+                        date: row.checkedByDate || null,
+                    }
                 };
             }
 
@@ -102,14 +116,13 @@ const getAllKeywords = async (department) => {
                 keywordMap[row.keyword_id].responsiblePersons.push({
                     id: row.person_id,
                     name: row.person_name,
-                    email: row.person_email 
+                    email: row.person_email
                 });
             }
         });
 
         const result = Object.values(keywordMap);
 
-        // Filter nach Abteilung, falls angegeben
         if (department) {
             const filteredData = result.filter(keyword => keyword.department === department);
             return filteredData;
@@ -120,40 +133,47 @@ const getAllKeywords = async (department) => {
         logger.error('Error retrieving keywords:', err);
         throw err;
     }
-}
+};
 
-
-const updateById = async (req, res, next) => { //TODO UPDATE (through DB Connection)
+const updateById = async (req, res, next) => {
     try {
-        console.log("jkdnsldjnfskgjb")
         const keywordId = +req.params.id;
         const updatedKeywordData = req.body;
 
         if (!updatedKeywordData) {
-            throw new BadRequest("No keyword data provided for update")
+            throw new BadRequest("No keyword data provided for update");
         }
 
-        let currentData = await getAllKeywords();
-        let keyword = currentData.find(currKeyword => currKeyword.id === keywordId)
+        const connection = getConnection();
 
-        if (!keyword) {
-            throw new NotFound(`Keyword with id ${keywordId} not found`);
+        // Update the Keywords table
+        await connection.execute(
+            `UPDATE Keywords SET name = ?, control = ? WHERE id = ?`,
+            [updatedKeywordData.name, updatedKeywordData.control, keywordId]
+        );
+
+        // Delete existing responsible persons for this keyword
+        await connection.execute(
+            `DELETE FROM Keyword_Person_Responsibilities WHERE keyword_id = ?`,
+            [keywordId]
+        );
+
+        // Insert the new responsible persons
+        if (updatedKeywordData.responsiblePersons && updatedKeywordData.responsiblePersons.length > 0) {
+            const responsibilities = updatedKeywordData.responsiblePersons.map(person => [keywordId, person.id]);
+            await connection.query(
+                `INSERT INTO Keyword_Person_Responsibilities (keyword_id, person_id) VALUES ?`,
+                [responsibilities]
+            );
         }
 
-        keyword.name = updatedKeywordData.name;
-        keyword.responsiblePersons = updatedKeywordData.responsiblePersons;
-        keyword.control = updatedKeywordData.control;
-
-        let updatedData = currentData.filter((data) => data.id != keywordId);
-        updatedData.push(keyword);
-        
-        await fs.writeFile("data\\keywords.json", JSON.stringify(updatedData)); 
         res.status(200).send('Keyword successfully updated');
-    } catch(err) {
+    } catch (err) {
         logger.error('Error updating the keyword:', err);
         res.status(500).send('Internal Server Error');
     }
-}
+};
+
 
 const create = async (req, res, next) => {
     let connection;

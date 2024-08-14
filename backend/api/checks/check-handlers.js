@@ -237,60 +237,57 @@ const getAllChecks = async (req, res) => {
 
 
 const getById = async (req, res) => {
-    try {
-      let department = req.query.dep;
-      let id = parseInt(req.params.id);
-  
-      // Überprüfe, ob die Abteilung und ID gültig sind
-      if (!department) {
-        return res.status(400).json({ error: 'Department is required' });
-      }
-      
-      department = department.toUpperCase() === 'PRODUKTION' ? 'prod' : department.toLowerCase();
-  
-      if (isNaN(id)) {
-        return res.status(400).json({ error: 'Invalid ID' });
-      }
-  
-      // Lese die Datei basierend auf der Abteilung
-      const data = await fs.readFile(`data/checks/checks_${department}.json`);
-      const jsonData = JSON.parse(data);
-      const check = jsonData.find((elem) => elem.id === id);
-  
-      if (!check) {
-        return res.status(404).json({ error: 'Check not found' });
-      }
-  
-      res.json(check);
-    } catch (err) {
-      logger.error("Error finding/parsing/reading the (searched check)/file:", err);
-      res.status(500).send("Internal Server Error");
-    }
-  };
+  try {
+    let department = req.query.dep;
+    let id = parseInt(req.params.id);
 
-// const readChecksFile = async (department) => {
-//     try {
-//       let filePath;
-//       switch (department) {
-//         case 'IT':
-//           filePath = "data/checks/checks_it.json";
-//           break;
-//         case 'Produktion':
-//           filePath = "data/checks/checks_prod.json";
-//           break;
-//         case 'NET':
-//           filePath = "data/checks/checks_net.json";
-//           break;
-//         default:
-//           throw new Error("Invalid department");
-//       }
-//       const data = await fs.readFile(filePath, "utf8");
-//       return JSON.parse(data);
-//     } catch (err) {
-//       logger.error(`Error reading or parsing the file for department ${department}:`, err);
-//       throw err;
-//     }
-//   };
+    // Überprüfe, ob die Abteilung und ID gültig sind
+    if (!department) {
+      return res.status(400).json({ error: 'Department is required' });
+    }
+
+    department = department.toUpperCase() === 'PRODUKTION' ? 'Produktion' :  department.toUpperCase();
+
+    if (isNaN(id)) {
+      return res.status(400).json({ error: 'Invalid ID' });
+    }
+
+    // Verbindungsaufbau zur Datenbank
+    const connection = getConnection();
+    if (!connection) {
+      throw new Error('No database connection available.');
+    }
+
+    // Abfrage, um den Check zu finden
+    const [checkRows] = await connection.execute(
+      `
+      SELECT c.id, c.date, c.state, c.isChecked, c.remark, c.department
+      FROM Checks c
+      WHERE c.id = ? AND c.department = ?
+      `,
+      [id, department]
+    );
+
+    if (checkRows.length === 0) {
+      return res.status(404).json({ error: 'Check not found' });
+    }
+
+    const check = checkRows[0];
+
+    // Verwende die getAllKeywords-Funktion, um alle Keywords für das Department abzurufen
+    const allKeywords = await getAllKeywords(department);
+
+    // Füge die Keywords zum Check hinzu
+    check.keyWords = allKeywords;
+    console.log(check)
+    res.json(check);
+  } catch (err) {
+    logger.error("Error finding/parsing/reading the (searched check)/file:", err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
 
   const formatDateFromISO = (isoDate) => {
     const date = new Date(isoDate);
