@@ -2,6 +2,7 @@ const { getConnection } = require("../../db/database");
 const { logger } = require("../../logging/log");
 const fs = require("fs").promises;
 const { getAllKeywords } = require("../keyWord/keyword-handlers");
+const mysql = require('mysql2/promise');
 
 const Holidays = require("date-holidays");
 const hd = new Holidays("AT", "2"); //AT = Austria , 2 = Carinthia
@@ -337,7 +338,16 @@ const getById = async (req, res) => {
     }
   };
 
-  const checkUpdate = async (req, res) => {
+  const createSetClause = (data) => {
+    return Object.keys(data)
+      .filter(key => data[key] !== null && data[key] !== undefined)
+      .map(key => `${mysql.escapeId(key)} = ?`)
+      .join(', ');
+  };
+
+  const updateCheck = async (req, res) => {
+    let connection;
+  
     try {
       const { dep, id } = req.query;
       const updatedData = req.body;
@@ -347,35 +357,99 @@ const getById = async (req, res) => {
         return res.status(400).json({ error: 'Department and ID are required' });
       }
   
-      const department = dep.toUpperCase() === 'PRODUKTION' ? 'prod' : dep.toLowerCase();
+      const department = dep.toUpperCase() === 'PRODUKTION' ? 'prod' : dep.toUpperCase();
       const checkId = parseInt(id);
-  
+
+      const updatedCheck = {
+        id: checkId, // ID darf nicht geändert werden
+        department: department // Department darf nicht geändert werden
+      };
+
       if (isNaN(checkId)) {
         return res.status(400).json({ error: 'Invalid ID' });
       }
+
+      if (updatedData.date) updatedCheck.date = updatedData.date;
+      if (updatedData.state) updatedCheck.state = updatedData.state;
+      if (updatedData.isChecked) updatedCheck.isChecked = updatedData.isChecked;
+      if (updatedData.remark) updatedCheck.remark = updatedData.remark;
   
-      // Lese die Datei basierend auf der Abteilung
-      const filePath = `data/checks/checks_${department}.json`;
-      const data = await fs.readFile(filePath, "utf8");
-      const jsonData = JSON.parse(data);
+      // Stelle die Verbindung zur Datenbank her
+      connection = await getConnection();
   
-      // Finde den Check mit der angegebenen ID
-      const checkIndex = jsonData.findIndex((elem) => elem.id === checkId);
-  
-      if (checkIndex === -1) {
-        return res.status(404).json({ error: 'Check not found' });
+      // Aktualisiere Check-Daten in der Datenbank
+      // Aktualisiere Check-Daten in der Datenbank
+      const setClause = createSetClause(updatedCheck);
+      const [results] = await connection.execute(
+        `UPDATE checks SET ${setClause} WHERE id = ? AND department = ?`,
+        [...Object.values(updatedCheck), checkId, department]
+      );
+
+      // Holen Sie sich die aktuellen Keywords für diesen Check
+      const [currentKeywords] = await connection.execute(
+        `SELECT keyword_id FROM check_keyword WHERE check_id = ?`,
+        [checkId]
+      );
+      const existingKeywordIds = new Set(currentKeywords.map(row => row.keyword_id));
+
+      // Entfernen Sie Keywords, die nicht mehr in den aktualisierten Daten vorhanden sind
+      const updatedKeywordIds = new Set(updatedData.keyWords.map(keyword => keyword.id));
+      const keywordsToDelete = [...existingKeywordIds].filter(id => !updatedKeywordIds.has(id));
+
+      if (keywordsToDelete.length > 0) {
+        await connection.execute(
+          `DELETE FROM check_keyword WHERE check_id = ? AND keyword_id IN (?)`,
+          [checkId, [keywordsToDelete]]
+        );
       }
   
-      // Aktualisiere die Check-Daten
-      jsonData[checkIndex] = { ...jsonData[checkIndex], ...updatedData };
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: 'Check not found or no update performed' });
+      }
+
+      // Fügen Sie neue Keywords hinzu, die noch nicht vorhanden sind
+      const keywordsToAdd = updatedData.keyWords.filter(keyword => !existingKeywordIds.has(keyword.id));
+      if (keywordsToAdd.length > 0) {
+        const keywordValues = keywordsToAdd.map(keyword => [checkId, keyword.id]);
+        await connection.execute(
+          `INSERT INTO check_keyword (check_id, keyword_id) VALUES ?`,
+          [keywordValues]
+        );
+      }
+
+      // Verwalten Sie die Verantwortlichen Personen für jedes Keyword
+    for (const keyword of updatedData.keyWords) {
+      const keywordId = keyword.id;
+      const responsiblePersons = keyword.responsiblePersons || [];
+
+      // Löschen Sie die bestehenden Verantwortlichen Personen für dieses Keyword
+      await connection.execute(
+        `DELETE FROM keyword_person_responsibilities WHERE keyword_id = ?`,
+        [keywordId]
+      );
+
+      // Fügen Sie die neuen Verantwortlichen Personen hinzu
+      if (responsiblePersons.length > 0) {
+        const responsibilities = responsiblePersons.map(person => [keywordId, person.id]);
+        await connection.execute(
+          `INSERT INTO keyword_person_responsibilities (keyword_id, person_id) VALUES ?`,
+          [responsibilities]
+        );
+      }
+
+      // Wenn das Keyword ein "checkedBy" Attribut enthält, aktualisiere es
+      if (keyword.checkedBy) {
+        await connection.execute(
+          `UPDATE keywords SET checkedByPerson = ?, checkedByDate = ? WHERE id = ? AND department = ?`,
+          [keyword.checkedBy.person.id, keyword.checkedBy.date, keywordId, department]
+        );
+      }
+    }
   
-      // Schreibe die aktualisierten Daten zurück in die Datei
-      await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2));
-  
-      res.status(200).send("Check successfully updated");
+      res.status(200).send('Check successfully updated');
     } catch (err) {
-      logger.error("Error updating the check:", err);
-      res.status(500).send("Internal Server Error");
+      console.error('Error updating the check:', err);
+      res.status(500).send('Internal Server Error');
     }
   };
   
@@ -386,5 +460,5 @@ module.exports = {
   getById,
   postObjects,
   getCheckByDate,
-  checkUpdate  
+  updateCheck  
 };

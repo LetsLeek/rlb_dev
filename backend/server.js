@@ -122,7 +122,7 @@ app.get("/api/persons", personHandler.getAll);
 /******************  CHECKS  ******************/
 app.get("/api/checks", checkHandler.getAllChecks);
 app.get("/api/checks/:id", checkHandler.getById);
-app.put("/api/checks/", checkHandler.checkUpdate)
+app.put("/api/checks/", checkHandler.updateCheck)
 app.post("/api/checks", checkHandler.createCheck);
 app.get('/api/checks/date/:date', checkHandler.getCheckByDate);
 
