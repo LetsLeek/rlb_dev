@@ -58,8 +58,12 @@ Content-Type: application/json
 }
 ],
 "checkedBy": {
-"person": null,
-"date": null
+"person": {
+    "id": 6,
+    "name": "Mathias Gombos",
+    "email": "mathiasgombos@outlook.com"
+  },
+  "date": "13.08.2024 13:24:21"
 }
 },
 {

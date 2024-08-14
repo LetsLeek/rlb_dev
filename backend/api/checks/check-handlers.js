@@ -1,7 +1,6 @@
 const { getConnection } = require("../../db/database");
 const { logger } = require("../../logging/log");
 const fs = require("fs").promises;
-const { getAllKeywords } = require("../keyWord/keyword-handlers");
 const mysql = require('mysql2/promise');
 
 const Holidays = require("date-holidays");
@@ -309,31 +308,30 @@ const getAllChecks = async (req, res) => {
 };
 
 
-
 const getById = async (req, res) => {
   try {
     let department = req.query.dep;
-    let id = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
 
     // Überprüfe, ob die Abteilung und ID gültig sind
     if (!department) {
       return res.status(400).json({ error: 'Department is required' });
     }
 
-    department = department.toUpperCase() === 'PRODUKTION' ? 'Produktion' :  department.toUpperCase();
+    department = department.toUpperCase() === 'PRODUKTION' ? 'Produktion' : department.toUpperCase();
 
     if (isNaN(id)) {
       return res.status(400).json({ error: 'Invalid ID' });
     }
 
     // Verbindungsaufbau zur Datenbank
-    const connection = getConnection();
+    const connection = await getConnection();
     if (!connection) {
       throw new Error('No database connection available.');
     }
 
     // Abfrage, um den Check zu finden
-    const [checkRows] = await connection.execute(
+    const [checkRows] = await connection.query(
       `
       SELECT c.id, c.date, c.state, c.isChecked, c.remark, c.department
       FROM Checks c
@@ -348,20 +346,83 @@ const getById = async (req, res) => {
 
     const check = checkRows[0];
 
-    // Verwende die getAllKeywords-Funktion, um alle Keywords für das Department abzurufen
-    const allKeywords = await getAllKeywords(department);
+    // Abruf der Keywords für den spezifischen Check
+    const [checkKeywords] = await connection.query(
+      `
+      SELECT 
+        ck.check_id,
+        k.id AS keyword_id,
+        k.name AS keyword_name,
+        k.control,
+        k.checkedByPersonId,
+        k.checkedByDate
+      FROM Check_Keyword ck
+      JOIN Keywords k ON ck.keyword_id = k.id
+      WHERE ck.check_id IN (?)
+      `,
+      [id]
+    );
 
-    // Füge die Keywords zum Check hinzu
-    check.keyWords = allKeywords;
-    console.log(check)
+    // Abruf der verantwortlichen Personen für die Keywords
+    const keywordIds = checkKeywords.map(keyword => keyword.keyword_id);
+    const [keywordPersons] = await connection.query(
+      `
+      SELECT 
+        kpr.keyword_id,
+        p.id AS person_id,
+        p.name AS person_name,
+        p.email AS person_email
+      FROM keyword_person_responsibilities kpr
+      JOIN Persons p ON kpr.person_id = p.id
+      WHERE kpr.keyword_id IN (?)
+      `,
+      [keywordIds]
+    );
+
+    // Abruf der Personen, die den Keyword-Check durchgeführt haben
+    const [persons] = await connection.query(
+      `
+      SELECT 
+        id,
+        name,
+        email
+      FROM Persons
+      WHERE id IN (SELECT DISTINCT checkedByPersonId FROM Keywords WHERE checkedByPersonId IS NOT NULL)
+      `
+    );
+
+    // Strukturierung der verantwortlichen Personen für jedes Keyword
+    const keywordPersonMap = keywordPersons.reduce((acc, { keyword_id, person_id, person_name, person_email }) => {
+      if (!acc[keyword_id]) {
+        acc[keyword_id] = [];
+      }
+      acc[keyword_id].push({
+        id: person_id,
+        name: person_name,
+        email: person_email
+      });
+      return acc;
+    }, {});
+
+    // Strukturierung der Keywords nach Check
+    check.keyWords = checkKeywords.map(({ keyword_id, keyword_name, control, checkedByPersonId, checkedByDate }) => ({
+      id: keyword_id,
+      name: keyword_name,
+      department: department,
+      control: control,
+      responsiblePersons: keywordPersonMap[keyword_id] || [],
+      checkedBy: {
+        person: persons.find(person => person.id === checkedByPersonId) || null,
+        date: checkedByDate || null
+      }
+    }));
+
     res.json(check);
   } catch (err) {
-    logger.error("Error finding/parsing/reading the (searched check)/file:", err);
-    res.status(500).send("Internal Server Error");
+    logger.error('Error finding/parsing/reading the (searched check)/file:', err);
+    res.status(500).send('Internal Server Error');
   }
 };
-
-
 
   const formatDateFromISO = (isoDate) => {
     const date = new Date(isoDate);
@@ -386,7 +447,7 @@ const getById = async (req, res) => {
         return res.status(400).json({ error: 'Department is required' });
       }
       
-      department = department.toUpperCase() === 'PRODUKTION' ? 'prod' : department.toLowerCase();
+      department = department.toUpperCase() === 'PRODUKTION' ? 'Produktion' : department.toUpperCase();
   
       if (!isoDate) {
         return res.status(400).json({ error: 'Date is required' });
@@ -395,21 +456,106 @@ const getById = async (req, res) => {
       // Konvertiere das ISO-Datum in das gewünschte Format
       const formattedDate = formatDateFromISO(isoDate).split(' ')[0]; // Nur das Datum, keine Uhrzeit
   
-      // Lese die Datei basierend auf der Abteilung
-      const data = await fs.readFile(`data/checks/checks_${department}.json`);
-      const jsonData = JSON.parse(data);
-      const check = jsonData.find((elem) => elem.date.startsWith(formattedDate));
+      // Verbindungsaufbau zur Datenbank
+      const connection = await getConnection();
+      if (!connection) {
+        throw new Error('No database connection available.');
+      }
   
-      if (!check) {
+      // Abfrage, um den Check basierend auf dem Datum und der Abteilung zu finden
+      const [checkRows] = await connection.query(
+        `
+        SELECT c.id, c.date, c.state, c.isChecked, c.remark, c.department
+        FROM Checks c
+        WHERE c.date = ? AND c.department = ?
+        `,
+        [formattedDate, department]
+      );
+  
+      if (checkRows.length === 0) {
         return res.status(404).json({ error: 'Check not found' });
       }
   
+      const check = checkRows[0];
+  
+      // Abruf der Keywords für den spezifischen Check
+      const [checkKeywords] = await connection.query(
+        `
+        SELECT 
+          ck.check_id,
+          k.id AS keyword_id,
+          k.name AS keyword_name,
+          k.control,
+          k.checkedByPersonId,
+          k.checkedByDate
+        FROM Check_Keyword ck
+        JOIN Keywords k ON ck.keyword_id = k.id
+        WHERE ck.check_id = ?
+        `,
+        [check.id]
+      );
+  
+      // Abruf der verantwortlichen Personen für die Keywords
+      const keywordIds = checkKeywords.map(keyword => keyword.keyword_id);
+      const [keywordPersons] = await connection.query(
+        `
+        SELECT 
+          kpr.keyword_id,
+          p.id AS person_id,
+          p.name AS person_name,
+          p.email AS person_email
+        FROM keyword_person_responsibilities kpr
+        JOIN Persons p ON kpr.person_id = p.id
+        WHERE kpr.keyword_id IN (?)
+        `,
+        [keywordIds]
+      );
+  
+      // Abruf der Personen, die den Keyword-Check durchgeführt haben
+      const [persons] = await connection.query(
+        `
+        SELECT 
+          id,
+          name,
+          email
+        FROM Persons
+        WHERE id IN (SELECT DISTINCT checkedByPersonId FROM Keywords WHERE checkedByPersonId IS NOT NULL)
+        `
+      );
+  
+      // Strukturierung der verantwortlichen Personen für jedes Keyword
+      const keywordPersonMap = keywordPersons.reduce((acc, { keyword_id, person_id, person_name, person_email }) => {
+        if (!acc[keyword_id]) {
+          acc[keyword_id] = [];
+        }
+        acc[keyword_id].push({
+          id: person_id,
+          name: person_name,
+          email: person_email
+        });
+        return acc;
+      }, {});
+  
+      // Strukturierung der Keywords nach Check
+      check.keyWords = checkKeywords.map(({ keyword_id, keyword_name, control, checkedByPersonId, checkedByDate }) => ({
+        id: keyword_id,
+        name: keyword_name,
+        department: department,
+        control: control,
+        responsiblePersons: keywordPersonMap[keyword_id] || [],
+        checkedBy: {
+          person: persons.find(person => person.id === checkedByPersonId) || null,
+          date: checkedByDate || null
+        }
+      }));
+  
       res.json(check);
     } catch (err) {
-      logger.error("Error finding/parsing/reading the (searched check)/file:", err);
-      res.status(500).send("Internal Server Error");
+      logger.error('Error finding/parsing/reading the (searched check)/file:', err);
+      res.status(500).send('Internal Server Error');
     }
-  };
+  };// TODO testen ob es geht
+  
 
   const createSetClause = (data) => {
     return Object.keys(data)
@@ -502,18 +648,19 @@ const getById = async (req, res) => {
       );
 
       // Fügen Sie die neuen Verantwortlichen Personen hinzu
-      if (responsiblePersons.length > 0) {
-        const responsibilities = responsiblePersons.map(person => [keywordId, person.id]);
-        await connection.execute(
-          `INSERT INTO keyword_person_responsibilities (keyword_id, person_id) VALUES ?`,
-          [responsibilities]
-        );
-      }
+      // Fügen Sie die neuen Verantwortlichen Personen hinzu
+    if (responsiblePersons.length > 0) {
+      const responsibilities = responsiblePersons.map(person => `(${keywordId}, ${person.id})`).join(', ');
+      const insertQuery = `INSERT INTO keyword_person_responsibilities (keyword_id, person_id) VALUES ${responsibilities}`;
+
+      await connection.execute(insertQuery);
+    }
+
 
       // Wenn das Keyword ein "checkedBy" Attribut enthält, aktualisiere es
-      if (keyword.checkedBy) {
+      if (keyword.checkedBy && (keyword.checkedBy.person != null || keyword.checkedBy.date != null)) {
         await connection.execute(
-          `UPDATE keywords SET checkedByPerson = ?, checkedByDate = ? WHERE id = ? AND department = ?`,
+          `UPDATE keywords SET checkedByPersonId = ?, checkedByDate = ? WHERE id = ? AND department = ?`,
           [keyword.checkedBy.person.id, keyword.checkedBy.date, keywordId, department]
         );
       }
