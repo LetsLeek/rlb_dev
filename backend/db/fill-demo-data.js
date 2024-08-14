@@ -124,7 +124,7 @@ async function fillDemoData() {
         // Einfügen von Checks
         const checksQuery = `
             INSERT INTO Checks (date, state, isChecked, department) VALUES
-            ('13.08.2024', 'Completed', TRUE, 'IT'),
+            ('13.08.2024', 'Completed', FALSE, 'IT'),
             ('13.08.2024', 'Pending', FALSE, 'NET'),
             ('13.08.2024', 'In Progress', FALSE, 'Produktion');
         `;
