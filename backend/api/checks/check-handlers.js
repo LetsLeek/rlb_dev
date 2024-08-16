@@ -648,7 +648,6 @@ const getById = async (req, res) => {
       );
 
       // Fügen Sie die neuen Verantwortlichen Personen hinzu
-      // Fügen Sie die neuen Verantwortlichen Personen hinzu
     if (responsiblePersons.length > 0) {
       const responsibilities = responsiblePersons.map(person => `(${keywordId}, ${person.id})`).join(', ');
       const insertQuery = `INSERT INTO keyword_person_responsibilities (keyword_id, person_id) VALUES ${responsibilities}`;
