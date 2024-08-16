@@ -597,7 +597,7 @@ const getById = async (req, res) => {
         return res.status(404).json({ error: 'Check not found or no update performed' });
       }
   
-      // Verwalte die Keywords ohne neue hinzuzufügen
+      // Verwalte die Keywords ohne neue hinzuzufuegen
       const [currentKeywords] = await connection.execute(
         `SELECT keyword_id FROM check_keyword WHERE check_id = ?`,
         [checkId]
