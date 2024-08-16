@@ -13,67 +13,69 @@ const {
 
   const getAll = async (req, res, next) => {
     try {
-        logger.debug('Keywords - getting all Keywords');
-
-        const connection = getConnection();
-
-        if (!connection) throw new Error('No database connection available.');
-
-        const [rows] = await connection.execute(`
-            SELECT k.id AS keyword_id, k.name AS keyword_name, k.department AS keyword_department, k.control AS keyword_control,
-                   p.id AS person_id, p.name AS person_name, p.email AS person_email,
-                   k.checkedByPersonId, k.checkedByDate
-            FROM Keywords k
-            LEFT JOIN Keyword_Person_Responsibilities kpr ON k.id = kpr.keyword_id
-            LEFT JOIN Persons p ON p.id = kpr.person_id
-            LEFT JOIN Persons cp ON k.checkedByPersonId = cp.id
-        `);
-
-        const keywordMap = {};
-
-        rows.forEach(row => {
-            if (!keywordMap[row.keyword_id]) {
-                keywordMap[row.keyword_id] = {
-                    id: row.keyword_id,
-                    name: row.keyword_name,
-                    department: row.keyword_department,
-                    control: row.keyword_control,
-                    responsiblePersons: [],
-                    checkedBy: {
-                        person: row.checkedByPersonId ? {
-                            id: row.checkedByPersonId,
-                            name: row.person_name,
-                            email: row.person_email,
-                        } : null,
-                        date: row.checkedByDate || null,
-                    }
-                };
-            }
-
-            if (row.person_id) {
-                keywordMap[row.keyword_id].responsiblePersons.push({
-                    id: row.person_id,
-                    name: row.person_name,
-                    email: row.person_email
-                });
-            }
-        });
-
-        const result = Object.values(keywordMap);
-
-        // Filter nach Abteilung, falls angegeben
-        const department = req.query.dep ? req.query.dep : undefined;
-        if (department) {
-            const filteredData = result.filter(keyword => keyword.department === department);
-            res.json(filteredData);
-        } else {
-            res.json(result);
+      logger.debug('Keywords - getting all Keywords with responsible persons');
+  
+      const connection = await getConnection(); // Stelle sicher, dass `getConnection` korrekt aufgerufen wird
+  
+      if (!connection) throw new Error('No database connection available.');
+  
+      // Abrufen der Keywords und der verantwortlichen Personen
+      const [rows] = await connection.execute(`
+          SELECT DISTINCT 
+              k.id AS keyword_id, 
+              k.name AS keyword_name, 
+              k.department AS keyword_department, 
+              k.control AS keyword_control,
+              kpr.person_id AS person_id, 
+              p.name AS person_name, 
+              p.email AS person_email
+          FROM Keywords k
+          JOIN Check_Keyword ck ON k.id = ck.keyword_id
+          LEFT JOIN Keyword_Person_Responsibilities kpr ON k.id = kpr.keyword_id
+          LEFT JOIN Persons p ON kpr.person_id = p.id
+      `);
+  
+      // Strukturieren der Daten
+      const keywordMap = {};
+  
+      rows.forEach(row => {
+        if (!keywordMap[row.keyword_id]) {
+          keywordMap[row.keyword_id] = {
+            id: row.keyword_id,
+            name: row.keyword_name,
+            department: row.keyword_department,
+            control: row.keyword_control,
+            responsiblePersons: []
+          };
         }
+  
+        if (row.person_id) {
+          keywordMap[row.keyword_id].responsiblePersons.push({
+            id: row.person_id,
+            name: row.person_name,
+            email: row.person_email
+          });
+        }
+      });
+  
+      const result = Object.values(keywordMap);
+  
+      // Filter nach Abteilung, falls angegeben
+      const department = req.query.dep ? req.query.dep : undefined;
+      if (department) {
+        const filteredData = result.filter(keyword => keyword.department === department);
+        res.json(filteredData);
+      } else {
+        res.json(result);
+      }
     } catch (err) {
-        logger.error('Error retrieving keywords and responsible persons:', err);
-        res.status(500).send('Internal Server Error');
+      logger.error('Error retrieving keywords and responsible persons:', err);
+      res.status(500).send('Internal Server Error');
     }
-};
+  };
+  
+  
+  
 
 const getAllKeywords = async (department) => {
     try {

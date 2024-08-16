@@ -213,7 +213,7 @@ const getAllChecks = async (req, res) => {
         isChecked,
         remark,
         department
-      FROM Checks
+      FROM checks
       WHERE department = ?
     `, [department]);
 
@@ -230,10 +230,10 @@ const getAllChecks = async (req, res) => {
         k.id AS keyword_id,
         k.name AS keyword,
         k.control,
-        k.checkedByPersonId,
-        k.checkedByDate
-      FROM Check_Keyword ck
-      JOIN Keywords k ON ck.keyword_id = k.id
+        ck.checked_by_person_id,
+        ck.checked_by_date
+      FROM check_keyword ck
+      JOIN keywords k ON ck.keyword_id = k.id
       WHERE ck.check_id IN (?)
     `, [checkIds]);
 
@@ -246,7 +246,7 @@ const getAllChecks = async (req, res) => {
         p.name AS person_name,
         p.email AS person_email
       FROM keyword_person_responsibilities kpr
-      JOIN Persons p ON kpr.person_id = p.id
+      JOIN persons p ON kpr.person_id = p.id
       WHERE kpr.keyword_id IN (?)
     `, [keywordIds]);
 
@@ -263,18 +263,8 @@ const getAllChecks = async (req, res) => {
       return acc;
     }, {});
 
-    // Abruf der Check-Details für die verantwortlichen Personen
-    const [persons] = await connection.query(`
-      SELECT 
-        id,
-        name,
-        email
-      FROM Persons
-      WHERE id IN (SELECT DISTINCT checkedByPersonId FROM Keywords WHERE checkedByPersonId IS NOT NULL)
-    `);
-
     // Strukturierung der Keywords nach Check
-    const checkKeywordMap = checkKeywords.reduce((acc, { check_id, keyword_id, keyword, control, checkedByPersonId, checkedByDate }) => {
+    const checkKeywordMap = checkKeywords.reduce((acc, { check_id, keyword_id, keyword, control, checked_by_person_id, checked_by_date }) => {
       if (!acc[check_id]) {
         acc[check_id] = [];
       }
@@ -285,8 +275,12 @@ const getAllChecks = async (req, res) => {
         control: control,
         responsiblePersons: keywordPersonMap[keyword_id] || [],
         checkedBy: {
-          person: persons.find(person => person.id === checkedByPersonId) || null,
-          date: checkedByDate || null
+          person: checked_by_person_id ? {
+            id: checked_by_person_id,
+            name: (keywordPersonMap[keyword_id] || []).find(person => person.id === checked_by_person_id)?.name || null,
+            email: (keywordPersonMap[keyword_id] || []).find(person => person.id === checked_by_person_id)?.email || null
+          } : null,
+          date: checked_by_date || null
         }
       });
       return acc;
@@ -302,11 +296,10 @@ const getAllChecks = async (req, res) => {
 
     res.json(result);
   } catch (err) {
-    logger.error('Error retrieving checks:', err);
+    console.error('Error retrieving checks:', err);
     res.status(500).send('Internal Server Error');
   }
 };
-
 
 const getById = async (req, res) => {
   try {
@@ -334,7 +327,7 @@ const getById = async (req, res) => {
     const [checkRows] = await connection.query(
       `
       SELECT c.id, c.date, c.state, c.isChecked, c.remark, c.department
-      FROM Checks c
+      FROM checks c
       WHERE c.id = ? AND c.department = ?
       `,
       [id, department]
@@ -354,18 +347,18 @@ const getById = async (req, res) => {
         k.id AS keyword_id,
         k.name AS keyword_name,
         k.control,
-        k.checkedByPersonId,
-        k.checkedByDate
-      FROM Check_Keyword ck
-      JOIN Keywords k ON ck.keyword_id = k.id
-      WHERE ck.check_id IN (?)
+        ck.checked_by_person_id,
+        ck.checked_by_date
+      FROM check_keyword ck
+      JOIN keywords k ON ck.keyword_id = k.id
+      WHERE ck.check_id = ?
       `,
       [id]
     );
 
     // Abruf der verantwortlichen Personen für die Keywords
     const keywordIds = checkKeywords.map(keyword => keyword.keyword_id);
-    const [keywordPersons] = await connection.query(
+    const [keywordPersons] = keywordIds.length > 0 ? await connection.query(
       `
       SELECT 
         kpr.keyword_id,
@@ -373,23 +366,25 @@ const getById = async (req, res) => {
         p.name AS person_name,
         p.email AS person_email
       FROM keyword_person_responsibilities kpr
-      JOIN Persons p ON kpr.person_id = p.id
+      JOIN persons p ON kpr.person_id = p.id
       WHERE kpr.keyword_id IN (?)
       `,
       [keywordIds]
-    );
+    ) : [[], []]; // Wenn keine Keyword-IDs vorhanden sind, gebe leere Ergebnisse zurück
 
     // Abruf der Personen, die den Keyword-Check durchgeführt haben
-    const [persons] = await connection.query(
+    const checkedByPersonIds = [...new Set(checkKeywords.map(keyword => keyword.checked_by_person_id).filter(id => id !== null))];
+    const [persons] = checkedByPersonIds.length > 0 ? await connection.query(
       `
       SELECT 
         id,
         name,
         email
-      FROM Persons
-      WHERE id IN (SELECT DISTINCT checkedByPersonId FROM Keywords WHERE checkedByPersonId IS NOT NULL)
-      `
-    );
+      FROM persons
+      WHERE id IN (?)
+      `,
+      [checkedByPersonIds]
+    ) : [[], []]; // Wenn keine Personen-IDs vorhanden sind, gebe leere Ergebnisse zurück
 
     // Strukturierung der verantwortlichen Personen für jedes Keyword
     const keywordPersonMap = keywordPersons.reduce((acc, { keyword_id, person_id, person_name, person_email }) => {
@@ -405,24 +400,26 @@ const getById = async (req, res) => {
     }, {});
 
     // Strukturierung der Keywords nach Check
-    check.keyWords = checkKeywords.map(({ keyword_id, keyword_name, control, checkedByPersonId, checkedByDate }) => ({
+    check.keyWords = checkKeywords.map(({ keyword_id, keyword_name, control, checked_by_person_id, checked_by_date }) => ({
       id: keyword_id,
       name: keyword_name,
       department: department,
       control: control,
       responsiblePersons: keywordPersonMap[keyword_id] || [],
       checkedBy: {
-        person: persons.find(person => person.id === checkedByPersonId) || null,
-        date: checkedByDate || null
+        person: persons.find(person => person.id === checked_by_person_id) || null,
+        date: checked_by_date || null
       }
     }));
 
     res.json(check);
   } catch (err) {
-    logger.error('Error finding/parsing/reading the (searched check)/file:', err);
+    console.error('Error finding/parsing/reading the (searched check)/file:', err);
     res.status(500).send('Internal Server Error');
   }
 };
+
+
 
   const formatDateFromISO = (isoDate) => {
     const date = new Date(isoDate);
@@ -557,13 +554,6 @@ const getById = async (req, res) => {
   };// TODO testen ob es geht
   
 
-  const createSetClause = (data) => {
-    return Object.keys(data)
-      .filter(key => data[key] !== null && data[key] !== undefined)
-      .map(key => `${mysql.escapeId(key)} = ?`)
-      .join(', ');
-  };
-
   const updateCheck = async (req, res) => {
     let connection;
   
@@ -571,100 +561,114 @@ const getById = async (req, res) => {
       const { dep, id } = req.query;
       const updatedData = req.body;
   
-      // Überprüfe, ob die Abteilung und ID gültig sind
       if (!dep || !id) {
         return res.status(400).json({ error: 'Department and ID are required' });
       }
   
       const department = dep.toUpperCase() === 'PRODUKTION' ? 'prod' : dep.toUpperCase();
       const checkId = parseInt(id);
-
-      const updatedCheck = {
-        id: checkId, // ID darf nicht geändert werden
-        department: department // Department darf nicht geändert werden
-      };
-
+  
       if (isNaN(checkId)) {
         return res.status(400).json({ error: 'Invalid ID' });
       }
-
+  
+      const updatedCheck = {
+        id: checkId,
+        department: department
+      };
+  
       if (updatedData.date) updatedCheck.date = updatedData.date;
       if (updatedData.state) updatedCheck.state = updatedData.state;
-      if (updatedData.isChecked) updatedCheck.isChecked = updatedData.isChecked;
+      if (updatedData.isChecked !== undefined) updatedCheck.isChecked = updatedData.isChecked;
       if (updatedData.remark) updatedCheck.remark = updatedData.remark;
   
-      // Stelle die Verbindung zur Datenbank her
       connection = await getConnection();
   
-      // Aktualisiere Check-Daten in der Datenbank
-      // Aktualisiere Check-Daten in der Datenbank
+      // Generiere das SET-Klausel für das Update-Statement
       const setClause = createSetClause(updatedCheck);
+  
+      // Aktualisiere die Check-Daten
       const [results] = await connection.execute(
         `UPDATE checks SET ${setClause} WHERE id = ? AND department = ?`,
         [...Object.values(updatedCheck), checkId, department]
       );
-
-      // Holen Sie sich die aktuellen Keywords für diesen Check
+  
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: 'Check not found or no update performed' });
+      }
+  
+      // Verwalte die Keywords ohne neue hinzuzufuegen
       const [currentKeywords] = await connection.execute(
         `SELECT keyword_id FROM check_keyword WHERE check_id = ?`,
         [checkId]
       );
       const existingKeywordIds = new Set(currentKeywords.map(row => row.keyword_id));
-
-      // Entfernen Sie Keywords, die nicht mehr in den aktualisierten Daten vorhanden sind
+  
       const updatedKeywordIds = new Set(updatedData.keyWords.map(keyword => keyword.id));
       const keywordsToDelete = [...existingKeywordIds].filter(id => !updatedKeywordIds.has(id));
-
+  
       if (keywordsToDelete.length > 0) {
         await connection.execute(
           `DELETE FROM check_keyword WHERE check_id = ? AND keyword_id IN (?)`,
-          [checkId, [keywordsToDelete]]
+          [checkId, keywordsToDelete]
         );
       }
   
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ error: 'Check not found or no update performed' });
-      }
-
-      // Fügen Sie neue Keywords hinzu, die noch nicht vorhanden sind
-      const keywordsToAdd = updatedData.keyWords.filter(keyword => !existingKeywordIds.has(keyword.id));
-      if (keywordsToAdd.length > 0) {
-        const keywordValues = keywordsToAdd.map(keyword => [checkId, keyword.id]);
+      // Verwalte die Verantwortlichen Personen ohne neue hinzuzufügen
+      for (const keyword of updatedData.keyWords) {
+        const keywordId = keyword.id;
+        const responsiblePersons = keyword.responsiblePersons || [];
+  
+        // Lösche bestehende Verantwortliche Personen
         await connection.execute(
-          `INSERT INTO check_keyword (check_id, keyword_id) VALUES ?`,
-          [keywordValues]
+          `DELETE FROM keyword_person_responsibilities WHERE keyword_id = ?`,
+          [keywordId]
         );
+  
+        // Füge nur die angegebenen Verantwortlichen Personen hinzu
+        if (responsiblePersons.length > 0) {
+          // Bereite die Werte explizit vor
+          const responsibilities = responsiblePersons.map(person => [keywordId, person.id]);
+  
+          // Dynamisch Platzhalter für die Werte generieren
+          const placeholders = responsibilities.map(() => '(?, ?)').join(', ');
+  
+          // Die INSERT-Abfrage mit den vorbereiteten Werten und Platzhaltern ausführen
+          await connection.execute(
+            `INSERT INTO keyword_person_responsibilities (keyword_id, person_id) VALUES ${placeholders}`,
+            responsibilities.flat()
+          );
+        }
+  
+        // Aktualisiere checkedBy-Attribute in der Tabelle Check_Keyword
+        const { checkedBy } = keyword;  
+        if (checkedBy) {
+          await connection.execute(
+            `UPDATE check_keyword SET checked_by_person_id = ?, checked_by_date = ? WHERE check_id = ? AND keyword_id = ?`,
+            [checkedBy.person?.id || null, checkedBy.date || null, checkId, keywordId]
+          );
+        }
       }
-
-      // Verwalten Sie die Verantwortlichen Personen für jedes Keyword
-    for (const keyword of updatedData.keyWords) {
-      const keywordId = keyword.id;
-      const responsiblePersons = keyword.responsiblePersons || [];
-
-      // Löschen Sie die bestehenden Verantwortlichen Personen für dieses Keyword
-      await connection.execute(
-        `DELETE FROM keyword_person_responsibilities WHERE keyword_id = ?`,
-        [keywordId]
+  
+      // Überprüfe, ob alle Keywords in diesem Check vollständig überprüft sind
+      const [keywordDetails] = await connection.execute(
+        `SELECT k.id, ck.checked_by_person_id, ck.checked_by_date
+         FROM check_keyword ck
+         JOIN keywords k ON k.id = ck.keyword_id
+         WHERE ck.check_id = ?`,
+        [checkId]
       );
-
-      // Fügen Sie die neuen Verantwortlichen Personen hinzu
-      // Fügen Sie die neuen Verantwortlichen Personen hinzu
-    if (responsiblePersons.length > 0) {
-      const responsibilities = responsiblePersons.map(person => `(${keywordId}, ${person.id})`).join(', ');
-      const insertQuery = `INSERT INTO keyword_person_responsibilities (keyword_id, person_id) VALUES ${responsibilities}`;
-
-      await connection.execute(insertQuery);
-    }
-
-
-      // Wenn das Keyword ein "checkedBy" Attribut enthält, aktualisiere es
-      if (keyword.checkedBy && (keyword.checkedBy.person != null || keyword.checkedBy.date != null)) {
+  
+      const allKeywordsChecked = keywordDetails.every(keyword =>
+        keyword.checked_by_person_id != null && keyword.checked_by_date != null
+      );
+  
+      if (allKeywordsChecked) {
         await connection.execute(
-          `UPDATE keywords SET checkedByPersonId = ?, checkedByDate = ? WHERE id = ? AND department = ?`,
-          [keyword.checkedBy.person.id, keyword.checkedBy.date, keywordId, department]
+          `UPDATE checks SET isChecked = true WHERE id = ? AND department = ?`,
+          [checkId, department]
         );
       }
-    }
   
       res.status(200).send('Check successfully updated');
     } catch (err) {
@@ -672,6 +676,16 @@ const getById = async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
   };
+  
+  
+  
+
+// Hilfsfunktion zur Generierung der SET-Klausel
+const createSetClause = (obj) => {
+  return Object.keys(obj)
+    .map(key => `${key} = ?`)
+    .join(', ');
+};
   
 
 module.exports = {

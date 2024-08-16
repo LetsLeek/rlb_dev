@@ -23,15 +23,19 @@ async function fillDemoData() {
 
         // SQL Statements ausführen
 
-        // Löschen der vorhandenen Daten und Zurücksetzen des AUTO_INCREMENT
-        await connection.query('CALL DeletePersonRecords();');
+        // Löschen der Daten in der Reihenfolge der Fremdschlüsselbeziehungen
+        await connection.query('DELETE FROM Check_Keyword;');
+        await connection.query('DELETE FROM Keyword_Person_Responsibilities;');
+        await connection.query('DELETE FROM Checks;');
+        await connection.query('DELETE FROM Keywords;');
+        await connection.query('DELETE FROM Persons;');
+
+        // Zurücksetzen des AUTO_INCREMENT
         await connection.query('ALTER TABLE `Persons` AUTO_INCREMENT = 1;');
-        await connection.query('CALL DeleteKeywordRecords();');
         await connection.query('ALTER TABLE `Keywords` AUTO_INCREMENT = 1;');
-        await connection.query('CALL DeleteCheckRecords();');
         await connection.query('ALTER TABLE `Checks` AUTO_INCREMENT = 1;');
-        await connection.query('CALL DeleteKeywordPersonMidtableRecords();');
-        await connection.query('CALL DeleteCheckKeywordMidtableRecords();');
+        await connection.query('ALTER TABLE `Check_Keyword` AUTO_INCREMENT = 1;');
+        await connection.query('ALTER TABLE `Keyword_Person_Responsibilities` AUTO_INCREMENT = 1;');
 
         // Einfügen von Personen
         const personsQuery = `
@@ -124,9 +128,9 @@ async function fillDemoData() {
         // Einfügen von Checks (set on false)
         const checksQuery = `
             INSERT INTO Checks (date, state, isChecked, department) VALUES
-            ('13.08.2024', 'Completed', FALSE, 'IT'),
-            ('13.08.2024', 'Pending', FALSE, 'NET'),
-            ('13.08.2024', 'In Progress', FALSE, 'Produktion');
+            ('16.08.2024', 'Completed', FALSE, 'IT'),
+            ('16.08.2024', 'Pending', FALSE, 'NET'),
+            ('16.08.2024', 'In Progress', FALSE, 'Produktion');
         `;
         await connection.query(checksQuery);
 
