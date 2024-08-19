@@ -565,8 +565,9 @@ const getById = async (req, res) => {
         return res.status(400).json({ error: 'Department and ID are required' });
       }
   
-      const department = dep.toUpperCase() === 'PRODUKTION' ? 'prod' : dep.toUpperCase();
+      // const department = dep.toUpperCase() === 'PRODUKTION' ? 'prod' : dep.toUpperCase();
       const checkId = parseInt(id);
+      const department = dep;
   
       if (isNaN(checkId)) {
         return res.status(400).json({ error: 'Invalid ID' });
@@ -574,7 +575,7 @@ const getById = async (req, res) => {
   
       const updatedCheck = {
         id: checkId,
-        department: department
+        department: dep
       };
   
       if (updatedData.date) updatedCheck.date = updatedData.date;
