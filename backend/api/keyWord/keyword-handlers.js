@@ -177,7 +177,7 @@ const updateById = async (req, res, next) => {
             );
         }
 
-        res.status(200).send('Keyword successfully updated');
+        res.status(204).send();
     } catch (err) {
         logger.error('Error updating the keyword:', err);
         res.status(500).send('Internal Server Error');
@@ -234,7 +234,7 @@ const create = async (req, res, next) => {
             );
         }
 
-        res.status(201).send('Keyword successfully created');
+        res.status(201).send();
     } catch (err) {
         logger.error('Error creating the keyword:', err);
         res.status(500).send('Internal Server Error');
