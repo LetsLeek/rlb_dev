@@ -11,7 +11,7 @@ const {
     InternalServerError,
   } = require("../../middlewares/error-handling");
 
-  const getAll = async (req, res, next) => {
+  const getAll = async (req, res) => {
     try {
       logger.debug('Keywords - getting all Keywords with responsible persons');
   
@@ -21,18 +21,20 @@ const {
   
       // Abrufen der Keywords und der verantwortlichen Personen
       const [rows] = await connection.execute(`
-          SELECT DISTINCT 
-              k.id AS keyword_id, 
-              k.name AS keyword_name, 
-              k.department AS keyword_department, 
-              k.control AS keyword_control,
-              kpr.person_id AS person_id, 
-              p.name AS person_name, 
-              p.email AS person_email
-          FROM Keywords k
-          JOIN Check_Keyword ck ON k.id = ck.keyword_id
-          LEFT JOIN Keyword_Person_Responsibilities kpr ON k.id = kpr.keyword_id
-          LEFT JOIN Persons p ON kpr.person_id = p.id
+        SELECT DISTINCT 
+            k.id AS keyword_id, 
+            k.name AS keyword_name, 
+            k.department AS keyword_department, 
+            k.control AS keyword_control,
+            kpr.person_id AS person_id, 
+            p.name AS person_name, 
+            p.email AS person_email,
+            ck.checked_by_person_id AS checked_by_person_id,
+            ck.checked_by_date AS checked_by_date
+        FROM Keywords k
+        LEFT JOIN Check_Keyword ck ON k.id = ck.keyword_id
+        LEFT JOIN Keyword_Person_Responsibilities kpr ON k.id = kpr.keyword_id
+        LEFT JOIN Persons p ON kpr.person_id = p.id
       `);
   
       // Strukturieren der Daten
@@ -45,7 +47,15 @@ const {
             name: row.keyword_name,
             department: row.keyword_department,
             control: row.keyword_control,
-            responsiblePersons: []
+            responsiblePersons: [],
+            checkedBy: {
+              person: row.checked_by_person_id ? {
+                id: row.checked_by_person_id,
+                name: row.person_name,
+                email: row.person_email
+              } : null,
+              date: row.checked_by_date || null,
+            }
           };
         }
   
@@ -73,8 +83,6 @@ const {
       res.status(500).send('Internal Server Error');
     }
   };
-  
-  
   
 
 const getAllKeywords = async (department) => {
@@ -169,7 +177,7 @@ const updateById = async (req, res, next) => {
             );
         }
 
-        res.status(200).send('Keyword successfully updated');
+        res.status(204).send();
     } catch (err) {
         logger.error('Error updating the keyword:', err);
         res.status(500).send('Internal Server Error');
@@ -226,7 +234,7 @@ const create = async (req, res, next) => {
             );
         }
 
-        res.status(201).send('Keyword successfully created');
+        res.status(201).send();
     } catch (err) {
         logger.error('Error creating the keyword:', err);
         res.status(500).send('Internal Server Error');

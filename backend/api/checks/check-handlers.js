@@ -180,7 +180,7 @@ const createCheck = async (req, res, next) => {
           );
       }
 
-      res.status(201).send('Check successfully created');
+      res.status(201).send();
   } catch (err) {
       logger.error('Error creating check:', err);
       res.status(500).send('Internal Server Error');
@@ -671,7 +671,7 @@ const getById = async (req, res) => {
         );
       }
   
-      res.status(200).send('Check successfully updated');
+      res.status(204).send();
     } catch (err) {
       console.error('Error updating the check:', err);
       res.status(500).send('Internal Server Error');
