@@ -241,11 +241,33 @@ const create = async (req, res, next) => {
     }
 };
 
+const deleteKeyword = async (req, res) => {
+    try {
+      logger.debug('Keywords - deleting Keyword by Id with responsible persons');
+  
+      const connection = await getConnection(); 
+      const keywordId = +req.params.id;
+  
+      if (!connection) throw new Error('No database connection available.');
+  
+      await connection.execute(
+        `DELETE FROM Keywords WHERE id = ?`,
+        [keywordId]
+    );
+
+    res.status(204).send();
+    } catch (err) {
+      logger.error('Error retrieving keywords and responsible persons:', err);
+      res.status(500).send('Internal Server Error');
+    }
+  };
+
 
 
 module.exports = {
     getAll,
     getAllKeywords,
     create,
-    updateById 
+    updateById,
+    deleteKeyword
 };

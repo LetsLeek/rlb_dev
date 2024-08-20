@@ -115,6 +115,7 @@ app.post('/api/sqltest/keywords', sqlHandler.createKeyword);
 app.get("/api/keywords", keywordHandler.getAll);
 app.post("/api/keywords", keywordHandler.create);
 app.put("/api/keywords/:id", keywordHandler.updateById);
+app.delete("/api/keywords/:id", keywordHandler.deleteKeyword);
 
 /******************  PERSONS  ******************/
 app.get("/api/persons", personHandler.getAll);
