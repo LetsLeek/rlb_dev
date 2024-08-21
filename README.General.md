@@ -16,6 +16,9 @@
     - [User Roles](#user-roles)
     - [Worker Workflow](#worker-workflow)
     - [Admin Capabilities](#admin-capabilities)
+  - [Database](#database)
+    - [Structure](#structure)
+    - [Stored Procedures](#stored-procedures)
   - [Illustrations](#illustrations)
     - [Login Page](#login-page)
     - [Overview](#overview)
@@ -109,16 +112,16 @@ Application is running on `http://localhost:8080`
 
 This application features three main pages that facilitate different aspects of the workflow:
 
-1. **Overview**: 
+1. **Overview**: [more](#overview) 
    
    Provides a summary of all checks, highlighting the current day's check at the top. 
    It displays how many keywords have been checked, by whom, and which ones remain unchecked.
 
-2. **Keywords**: 
+2. **Keywords**: [more](#keywords) 
    
    Lists all the keywords relevant to the user’s department. Users can view, edit, delete, or add keywords (only for their own department).
 
-3. **Mailview**: 
+3. **Mailview**: [more](#mailview) 
    
    Displays emails received by the department. Each email contains information about keywords that need to be reviewed. Users can read the emails, check the associated files, and update the status of the keywords as needed.
 
@@ -174,6 +177,43 @@ Admins have comprehensive access and can:
 
 - Use a backdoor feature to manually mark missing keywords as checked if a daily check is incomplete.
 
+
+## Database 
+
+The database is designed to store information about checks, keywords and persons (users)
+
+### Structure
+
+*Database - Logical Model*
+![Logical model](./Illustrations/database-lm.png)
+
+*Database - Conecptional Model*
+![Conceptional model](./Illustrations/database-cm.png)
+
+### Stored Procedures
+
+**Calls**:
+
+```sql
+    -- DELETES EXISTING PERSONS + AUTO-INCREMENT = 1
+    CALL DeletePersonRecords();
+    ALTER TABLE `Persons` AUTO_INCREMENT = 1;
+
+    -- DELETES EXISTING KEYWORDS + AUTO-INCREMENT = 1
+    CALL DeleteKeywordRecords();
+    ALTER TABLE `Keywords` AUTO_INCREMENT = 1;
+
+    -- DELETES EXISTING MIDTABLE (Keywords + Persons)
+    CALL DeleteKeywordPersonMidtableRecords();
+
+    -- DELETES EXISTING MIDTABLE (Checks + Keywords)
+    CALL DeleteCheckKeywordMidtableRecords();
+
+    -- DELETES EXISTING CHECKS
+    CALL DeleteCheckRecords();
+    ALTER TABLE `Checks` AUTO_INCREMENT = 1;
+```
+
 ## Illustrations
 
 ### Login Page
@@ -199,6 +239,12 @@ Admins have comprehensive access and can:
 
 *Keywords: admin*
 ![Keywords-Admin](./Illustrations/keywords-admin.png)
+
+*Keyword-Edit: worker and admin*
+![Keyword-Edit](./Illustrations/keyword-edit.png)
+
+*Keyword-Add: worker (admin can choose the department)*
+![Keyword-Add](./Illustrations/keyword-add.png)
 
 ### Mailview
 *Mailview: worker and admin*
