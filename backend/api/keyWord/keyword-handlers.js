@@ -12,77 +12,69 @@ const {
   } = require("../../middlewares/error-handling");
 
   const getAll = async (req, res) => {
+    let connection;
+  
     try {
-      logger.debug('Keywords - getting all Keywords with responsible persons');
+      // Verbindung zur Datenbank herstellen
+      connection = await getConnection();
   
-      const connection = await getConnection(); // Stelle sicher, dass `getConnection` korrekt aufgerufen wird
+      if (!connection) {
+        throw new Error('No database connection available.');
+      }
   
-      if (!connection) throw new Error('No database connection available.');
-  
-      // Abrufen der Keywords und der verantwortlichen Personen
-      const [rows] = await connection.execute(`
-        SELECT DISTINCT 
-            k.id AS keyword_id, 
-            k.name AS keyword_name, 
-            k.department AS keyword_department, 
-            k.control AS keyword_control,
-            kpr.person_id AS person_id, 
-            p.name AS person_name, 
-            p.email AS person_email,
-            ck.checked_by_person_id AS checked_by_person_id,
-            ck.checked_by_date AS checked_by_date
-        FROM Keywords k
-        LEFT JOIN Check_Keyword ck ON k.id = ck.keyword_id
-        LEFT JOIN Keyword_Person_Responsibilities kpr ON k.id = kpr.keyword_id
-        LEFT JOIN Persons p ON kpr.person_id = p.id
+      // Abruf aller Keywords aus der Tabelle `keywords`
+      const [keywords] = await connection.query(`
+        SELECT 
+          id AS keyword_id,
+          name AS keyword_name,
+          control,
+          department
+        FROM keywords
       `);
   
-      // Strukturieren der Daten
-      const keywordMap = {};
+      // Abruf aller Verantwortlichen Personen für die Keywords
+      const keywordIds = keywords.map(keyword => keyword.keyword_id);
+      const [keywordPersons] = await connection.query(`
+        SELECT 
+          kpr.keyword_id,
+          p.id AS person_id,
+          p.name AS person_name,
+          p.email AS person_email
+        FROM keyword_person_responsibilities kpr
+        JOIN persons p ON kpr.person_id = p.id
+        WHERE kpr.keyword_id IN (?)
+      `, [keywordIds]);
   
-      rows.forEach(row => {
-        if (!keywordMap[row.keyword_id]) {
-          keywordMap[row.keyword_id] = {
-            id: row.keyword_id,
-            name: row.keyword_name,
-            department: row.keyword_department,
-            control: row.keyword_control,
-            responsiblePersons: [],
-            checkedBy: {
-              person: row.checked_by_person_id ? {
-                id: row.checked_by_person_id,
-                name: row.person_name,
-                email: row.person_email
-              } : null,
-              date: row.checked_by_date || null,
-            }
-          };
+      // Strukturierung der Verantwortlichen Personen nach Keyword
+      const keywordPersonMap = keywordPersons.reduce((acc, { keyword_id, person_id, person_name, person_email }) => {
+        if (!acc[keyword_id]) {
+          acc[keyword_id] = [];
         }
+        acc[keyword_id].push({
+          id: person_id,
+          name: person_name,
+          email: person_email
+        });
+        return acc;
+      }, {});
   
-        if (row.person_id) {
-          keywordMap[row.keyword_id].responsiblePersons.push({
-            id: row.person_id,
-            name: row.person_name,
-            email: row.person_email
-          });
-        }
-      });
+      // Strukturierung der Keywords mit ihren Verantwortlichen
+      const result = keywords.map(keyword => ({
+        id: keyword.keyword_id,
+        name: keyword.keyword_name,
+        department: keyword.department,
+        control: keyword.control,
+        responsiblePersons: keywordPersonMap[keyword.keyword_id] || []
+      }));
   
-      const result = Object.values(keywordMap);
-  
-      // Filter nach Abteilung, falls angegeben
-      const department = req.query.dep ? req.query.dep : undefined;
-      if (department) {
-        const filteredData = result.filter(keyword => keyword.department === department);
-        res.json(filteredData);
-      } else {
-        res.json(result);
-      }
+      res.json(result);
     } catch (err) {
-      logger.error('Error retrieving keywords and responsible persons:', err);
+      console.error('Error retrieving keywords:', err);
       res.status(500).send('Internal Server Error');
     }
   };
+  
+  
   
 
 const getAllKeywords = async (department) => {
