@@ -31,7 +31,7 @@ const getRemarkAndStateForDate = (date) => {
     // 0 für Sonntag, 6 für Samstag
     return { remark: "WEEKEND", state: getDayName(dayOfWeek) };
   } else {
-    return {remark: "", state: "In Progress"};
+    return {remark: null, state: "In Progress"};
   }
 };
 
@@ -301,6 +301,7 @@ const getAllChecks = async (req, res) => {
   }
 };
 
+
 const getById = async (req, res) => {
   try {
     let department = req.query.dep;
@@ -556,138 +557,101 @@ const getById = async (req, res) => {
 
   const updateCheck = async (req, res) => {
     let connection;
-  
-    try {
-      const { dep, id } = req.query;
-      const updatedData = req.body;
-  
-      if (!dep || !id) {
-        return res.status(400).json({ error: 'Department and ID are required' });
-      }
-  
-      // const department = dep.toUpperCase() === 'PRODUKTION' ? 'prod' : dep.toUpperCase();
-      const checkId = parseInt(id);
-      const department = dep;
-  
-      if (isNaN(checkId)) {
-        return res.status(400).json({ error: 'Invalid ID' });
-      }
-  
-      const updatedCheck = {
-        id: checkId,
-        department: dep
-      };
-  
-      if (updatedData.date) updatedCheck.date = updatedData.date;
-      if (updatedData.state) updatedCheck.state = updatedData.state;
-      if (updatedData.isChecked !== undefined) updatedCheck.isChecked = updatedData.isChecked;
-      if (updatedData.remark) updatedCheck.remark = updatedData.remark;
-  
-      connection = await getConnection();
-  
-      // Generiere das SET-Klausel für das Update-Statement
-      const setClause = createSetClause(updatedCheck);
-  
-      // Aktualisiere die Check-Daten
-      const [results] = await connection.execute(
-        `UPDATE checks SET ${setClause} WHERE id = ? AND department = ?`,
-        [...Object.values(updatedCheck), checkId, department]
-      );
-  
-      if (results.affectedRows === 0) {
-        return res.status(404).json({ error: 'Check not found or no update performed' });
-      }
-  
-      // Verwalte die Keywords ohne neue hinzuzufuegen
-      const [currentKeywords] = await connection.execute(
-        `SELECT keyword_id FROM check_keyword WHERE check_id = ?`,
-        [checkId]
-      );
-      const existingKeywordIds = new Set(currentKeywords.map(row => row.keyword_id));
-  
-      const updatedKeywordIds = new Set(updatedData.keyWords.map(keyword => keyword.id));
-      const keywordsToDelete = [...existingKeywordIds].filter(id => !updatedKeywordIds.has(id));
-  
-      if (keywordsToDelete.length > 0) {
-        await connection.execute(
-          `DELETE FROM check_keyword WHERE check_id = ? AND keyword_id IN (?)`,
-          [checkId, keywordsToDelete]
-        );
-      }
-  
-      // Verwalte die Verantwortlichen Personen ohne neue hinzuzufügen
-      for (const keyword of updatedData.keyWords) {
-        const keywordId = keyword.id;
-        const responsiblePersons = keyword.responsiblePersons || [];
-  
-        // Lösche bestehende Verantwortliche Personen
-        await connection.execute(
-          `DELETE FROM keyword_person_responsibilities WHERE keyword_id = ?`,
-          [keywordId]
-        );
-  
-        // Füge nur die angegebenen Verantwortlichen Personen hinzu
-        if (responsiblePersons.length > 0) {
-          // Bereite die Werte explizit vor
-          const responsibilities = responsiblePersons.map(person => [keywordId, person.id]);
-  
-          // Dynamisch Platzhalter für die Werte generieren
-          const placeholders = responsibilities.map(() => '(?, ?)').join(', ');
-  
-          // Die INSERT-Abfrage mit den vorbereiteten Werten und Platzhaltern ausführen
-          await connection.execute(
-            `INSERT INTO keyword_person_responsibilities (keyword_id, person_id) VALUES ${placeholders}`,
-            responsibilities.flat()
-          );
-        }
-  
-        // Aktualisiere checkedBy-Attribute in der Tabelle Check_Keyword
-        const { checkedBy } = keyword;  
-        if (checkedBy) {
-          await connection.execute(
-            `UPDATE check_keyword SET checked_by_person_id = ?, checked_by_date = ? WHERE check_id = ? AND keyword_id = ?`,
-            [checkedBy.person?.id || null, checkedBy.date || null, checkId, keywordId]
-          );
-        }
-      }
-  
-      // Überprüfe, ob alle Keywords in diesem Check vollständig überprüft sind
-      const [keywordDetails] = await connection.execute(
-        `SELECT k.id, ck.checked_by_person_id, ck.checked_by_date
-         FROM check_keyword ck
-         JOIN keywords k ON k.id = ck.keyword_id
-         WHERE ck.check_id = ?`,
-        [checkId]
-      );
-  
-      const allKeywordsChecked = keywordDetails.every(keyword =>
-        keyword.checked_by_person_id != null && keyword.checked_by_date != null
-      );
-  
-      if (allKeywordsChecked) {
-        await connection.execute(
-          `UPDATE checks SET isChecked = true WHERE id = ? AND department = ?`,
-          [checkId, department]
-        );
-      }
-  
-      res.status(204).send();
-    } catch (err) {
-      console.error('Error updating the check:', err);
-      res.status(500).send('Internal Server Error');
-    }
-  };
-  
-  
-  
 
-// Hilfsfunktion zur Generierung der SET-Klausel
-const createSetClause = (obj) => {
-  return Object.keys(obj)
-    .map(key => `${key} = ?`)
-    .join(', ');
+    try {
+        const { dep, id } = req.query;
+        const updatedData = req.body;
+
+        if (!dep || !id) {
+            return res.status(400).json({ error: 'Department and ID are required' });
+        }
+
+        const checkId = parseInt(id, 10);
+        const department = dep;
+
+        if (isNaN(checkId)) {
+            return res.status(400).json({ error: 'Invalid ID' });
+        }
+
+        const updatedCheck = {
+            date: updatedData.date,
+            state: updatedData.state,
+            isChecked: updatedData.isChecked,
+            remark: updatedData.remark
+        };
+
+        // Remove any properties that are undefined
+        const filteredCheck = Object.fromEntries(
+            Object.entries(updatedCheck).filter(([_, v]) => v !== undefined)
+        );
+
+        // Generate SET clause
+        const setClause = Object.keys(filteredCheck)
+            .map(key => `${key} = ?`)
+            .join(', ');
+
+        // Prepare parameters
+        const parameters = [...Object.values(filteredCheck), checkId, department];
+
+        console.log('Set Clause:', setClause);
+        console.log('Parameters:', parameters);
+
+        connection = await getConnection();
+
+        // Update the check data
+        const [results] = await connection.execute(
+            `UPDATE checks SET ${setClause} WHERE id = ? AND department = ?`,
+            parameters
+        );
+
+        if (results.affectedRows === 0) {
+            return res.status(404).json({ error: 'Check not found or no update performed' });
+        }
+
+        // Update the check_keyword table
+        if (updatedData.keyWords && Array.isArray(updatedData.keyWords)) {
+            for (const keyword of updatedData.keyWords) {
+                const keywordId = keyword.id;
+                const { checkedBy } = keyword;
+
+                if (checkedBy) {
+                    await connection.execute(
+                        `INSERT INTO check_keyword (check_id, keyword_id, checked_by_person_id, checked_by_date) 
+                         VALUES (?, ?, ?, ?) 
+                         ON DUPLICATE KEY UPDATE checked_by_person_id = VALUES(checked_by_person_id), checked_by_date = VALUES(checked_by_date)`,
+                        [checkId, keywordId, checkedBy.person?.id || null, checkedBy.date || null]
+                    );
+                }
+            }
+        }
+
+        // Verify if all keywords are checked
+        const [keywordDetails] = await connection.execute(
+            `SELECT k.id, ck.checked_by_person_id, ck.checked_by_date
+             FROM check_keyword ck
+             JOIN keywords k ON k.id = ck.keyword_id
+             WHERE ck.check_id = ?`,
+            [checkId]
+        );
+
+        const allKeywordsChecked = keywordDetails.every(keyword =>
+            keyword.checked_by_person_id != null && keyword.checked_by_date != null
+        );
+
+        if (allKeywordsChecked) {
+            await connection.execute(
+                `UPDATE checks SET isChecked = true WHERE id = ? AND department = ?`,
+                [checkId, department]
+            );
+        }
+
+        res.status(204).send();
+    } catch (err) {
+        console.error('Error updating the check:', err);
+        res.status(500).send('Internal Server Error');
+    } 
 };
-  
+
 
 module.exports = {
   getAllChecks,
