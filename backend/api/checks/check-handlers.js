@@ -65,12 +65,26 @@ const postObjects = async () => {
       nextDay.setDate(currentDate.getDate() + 1);
       const formattedDate = await formateCurrentDate(nextDay);
       const remarkAndState = getRemarkAndStateForDate(nextDay);
+      let isFirstWorkday = currentDate.getDay() == 1 ? true : false;
 
       // Erhalte alle Keywords aus der Datenbank
       const [rows] = await connection.execute('SELECT * FROM Keywords');
-      const keywordsIT = rows.filter((keyword) => keyword.department === "IT");
-      const keywordsPROD = rows.filter((keyword) => keyword.department === "Produktion");
-      const keywordsNET = rows.filter((keyword) => keyword.department === "NET");
+
+      // Filtere die Keywords für die IT-Abteilung
+      const keywordsIT = rows.filter((keyword) => {
+        return keyword.department === "IT" && (isFirstWorkday || keyword.control === "daily");
+      });
+
+      // Filtere die Keywords für die Produktionsabteilung
+      const keywordsPROD = rows.filter((keyword) => {
+        return keyword.department === "Produktion" && (isFirstWorkday || keyword.control === "daily");
+      });
+
+      // Filtere die Keywords für die NET-Abteilung
+      const keywordsNET = rows.filter((keyword) => {
+        return keyword.department === "NET" && (isFirstWorkday || keyword.control === "daily");
+      });
+
 
       // Erstelle neue Check-Objekte
       const insertCheck = async (body) => {
