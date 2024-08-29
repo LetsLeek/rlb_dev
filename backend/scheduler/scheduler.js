@@ -15,8 +15,8 @@ function createNextDayCheck() {
     });
 }
 
-// Für Testzwecke: Erstelle einen neuen Cron-Job, der jede Minute ausgeführt wird
-const job = new CronJob('10 0 * * *', createNextDayCheck, null, true, 'Europe/Berlin'); //TODO auf 18 Uhr anpassen
+// Um 18 wird jedes Mal ein neuer Check erstellt
+const job = new CronJob('18 0 * * *', createNextDayCheck, null, true, 'Europe/Berlin'); 
 
 // Starte den Cron-Job
 job.start();

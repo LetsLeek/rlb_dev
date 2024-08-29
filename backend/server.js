@@ -125,7 +125,7 @@ app.get("/api/checks", checkHandler.getAllChecks);
 app.get("/api/checks/:id", checkHandler.getById);
 app.put("/api/checks/", checkHandler.updateCheck);
 app.post("/api/checks", checkHandler.createCheck);
-app.get('/api/checks/date/:date', checkHandler.getCheckByDate);
+app.get('/api/checks/date/:date', checkHandler.getCheckByDate); //not relevant
 
 /******************  MAILS  ******************/
 app.get("/api/mails-smtp", mailHandler.getMails);
