@@ -131,9 +131,9 @@ There are two types of users in the application:
 
 - **Admin**: 
   
-  - Has full access to all features and can manage all departments.
+  - Has full access to all features and can manage everything in his department.
   
-  -  Admins can view and edit any checks and keywords across all departments. 
+  -  Admins can view and edit any checks (in their department) and keywords . 
   
   -  If a check is not completed on time, Admins can manually update the status using a backdoor feature.
 
