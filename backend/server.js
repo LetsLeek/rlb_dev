@@ -123,14 +123,17 @@ app.get("/api/persons", personHandler.getAll);
 /******************  CHECKS  ******************/
 app.get("/api/checks", checkHandler.getAllChecks);
 app.get("/api/checks/:id", checkHandler.getById);
-app.put("/api/checks/", checkHandler.updateCheck)
+app.put("/api/checks/", checkHandler.updateCheck);
 app.post("/api/checks", checkHandler.createCheck);
 app.get('/api/checks/date/:date', checkHandler.getCheckByDate);
 
 /******************  MAILS  ******************/
+app.get("/api/mails-smtp", mailHandler.getMails);
+app.post("/api/send-warning", mailHandler.sendWarningMail);
+
 app.get("/api/mails", mailHandler.getAll);
 app.get("/api/mails/:id", mailHandler.getById);
-app.put('/api/mails/:id', mailHandler.updateMail)
+app.put('/api/mails/:id', mailHandler.updateMail);
 
 // register catch-all route to handle client-side routing with index.html
 app.get("*", (_req, res) => {
